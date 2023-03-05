@@ -28,7 +28,7 @@ const Main: React.FC = () => {
             </Flex>
 
             <img
-              src="/src/assets/images/mindmeld-intro.png"
+              src="/assets/images/mindmeld-intro.png"
               alt="MindMeld slide"
             />
           </div>

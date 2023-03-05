@@ -10,7 +10,7 @@ const AppHeader: React.FC = () => {
           <Link to="/">
             <img
               className="app-logo"
-              src="/src/assets/images/logo.png"
+              src="/assets/images/logo.png"
               alt="MindMeld"
             />
           </Link>
