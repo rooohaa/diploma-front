@@ -10,13 +10,6 @@ export const HeaderWrapper = styled.header`
     align-items: center;
     justify-content: space-between;
 
-    .app-logo {
-      width: 112px;
-      height: 36px;
-
-      object-fit: contain;
-    }
-
     .app-nav ul {
       list-style: none;
 

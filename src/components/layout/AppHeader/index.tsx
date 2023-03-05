@@ -1,5 +1,6 @@
 import { Button, Container } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import { AppLogoLink } from 'components';
 import { HeaderWrapper } from './style';
 
 const AppHeader: React.FC = () => {
@@ -7,13 +8,7 @@ const AppHeader: React.FC = () => {
     <HeaderWrapper>
       <Container size="lg" style={{ width: '100%' }}>
         <div className="app-header-inner">
-          <Link to="/">
-            <img
-              className="app-logo"
-              src="/assets/images/logo.png"
-              alt="MindMeld"
-            />
-          </Link>
+          <AppLogoLink />
 
           <nav className="app-nav">
             <ul>
