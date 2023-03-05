@@ -1,6 +1,7 @@
 import { Flex } from '@mantine/core';
 import { Container, Title, Text, Button } from '@mantine/core';
 import { AppLayout } from 'components';
+import { Link } from 'react-router-dom';
 import { MainSection } from './style';
 
 const Main: React.FC = () => {
@@ -24,13 +25,12 @@ const Main: React.FC = () => {
                 for academic institutions.
               </Text>
 
-              <Button size="lg">Explore</Button>
+              <Button size="lg" component={Link} to="/dashboard">
+                Explore
+              </Button>
             </Flex>
 
-            <img
-              src="/assets/images/mindmeld-intro.png"
-              alt="MindMeld slide"
-            />
+            <img src="/assets/images/mindmeld-intro.png" alt="MindMeld slide" />
           </div>
         </Container>
       </MainSection>
