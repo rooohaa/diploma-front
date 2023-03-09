@@ -31,8 +31,8 @@ const AppHeader: React.FC = () => {
               </li>
 
               <li>
-                <Button component={Link} to="/sign-up" radius="lg">
-                  Sign up
+                <Button component={Link} to="/sign-in" radius="lg">
+                  Sign-in
                 </Button>
               </li>
             </ul>
