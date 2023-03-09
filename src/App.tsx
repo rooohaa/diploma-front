@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import { DashboardLayout } from './components/layout/DashboardLayout';
-import { Main, Login, SignUp } from './pages';
+import { Main, SignUp, SignIn } from './pages';
 
 const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route
         path="/dashboard"
