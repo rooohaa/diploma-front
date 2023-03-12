@@ -1,15 +1,59 @@
-import { Button } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Container } from '@mantine/core';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppLayout } from '~/components';
+import {
+  IAcademicPerformanceFormValues,
+  IMainFormValues,
+  IPersonalInfoFormValues,
+} from '~/types/sign-up';
+import { AcademicPermormance } from './AcademicPerformance';
+import { Main } from './Main';
+import { PersonalInfo } from './PersonalInfo';
+
+interface IFormData extends IMainFormValues, IPersonalInfoFormValues {}
+
+const forms = ['main', 'personal-info', 'academic-performance'];
 
 const SignUp: React.FC = () => {
-  return (
-    <AppLayout>
-      <div>Signup page.</div>
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState<IFormData | {}>({});
+  const navigate = useNavigate();
 
-      <Button component={Link} to="/" size="lg" variant="default">
-        Go back
-      </Button>
+  const handleMoveNext = () => {
+    if (currentStep < forms.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      navigate('/');
+    }
+  };
+
+  const handleSubmit = (
+    values:
+      | IMainFormValues
+      | IPersonalInfoFormValues
+      | IAcademicPerformanceFormValues
+  ) => {
+    setFormData({ ...formData, ...values });
+    handleMoveNext();
+  };
+
+  const renderForms = () => {
+    switch (forms[currentStep]) {
+      case 'main':
+        return <Main onSubmit={handleSubmit} />;
+      case 'personal-info':
+        return <PersonalInfo onSubmit={handleSubmit} />;
+      case 'academic-performance':
+        return <AcademicPermormance onSubmit={handleSubmit} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <AppLayout isAuthHeader={true}>
+      <Container size="lg">{renderForms()}</Container>
     </AppLayout>
   );
 };
