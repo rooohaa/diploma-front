@@ -1,13 +1,17 @@
 import { AppHeader } from '../AppHeader';
 
 interface IAppLayoutProps {
+  isAuthHeader?: boolean;
   children: React.ReactNode;
 }
 
-const AppLayout: React.FC<IAppLayoutProps> = ({ children }) => {
+const AppLayout: React.FC<IAppLayoutProps> = ({
+  children,
+  isAuthHeader = false,
+}) => {
   return (
     <>
-      <AppHeader />
+      <AppHeader isAuth={isAuthHeader} />
       <main>{children}</main>
     </>
   );
