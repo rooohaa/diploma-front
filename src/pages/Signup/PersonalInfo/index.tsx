@@ -25,7 +25,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
   return (
     <FormWrapper imagePath="sign-up_personal-info.png">
       <Flex direction="column" justify="center" sx={{ width: '50%' }}>
-        <Box sx={{ textAlign: 'center', marginBottom: '50px' }}>
+        <Box sx={{ textAlign: 'center', marginBottom: '28px' }}>
           <Title>Sign up</Title>
 
           <Text fz="lg" component="h3">
@@ -34,7 +34,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
         </Box>
 
         <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <TextInput
               placeholder="Write your Full Name"
               label="Full Name"
@@ -42,7 +42,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
             />
           </Box>
 
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <TextInput
               placeholder="Write your Last Name"
               label="Last Name"
@@ -50,7 +50,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
             />
           </Box>
 
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <TextInput
               placeholder="Write your Phone Number"
               label="Phone Number"
@@ -58,7 +58,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
             />
           </Box>
 
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <DatePicker
               placeholder="Pick your Birth Date"
               label="Birth Date"
@@ -66,7 +66,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
             />
           </Box>
 
-          <Button type="submit" size="lg" variant="filled" fullWidth>
+          <Button type="submit" size="md" variant="filled" fullWidth>
             Next
           </Button>
         </Box>

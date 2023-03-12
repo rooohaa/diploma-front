@@ -41,7 +41,7 @@ const AcademicPermormance: React.FC<IAcademicPermormanceProps> = ({
   return (
     <FormWrapper imagePath="sign-up_academic-performance.png">
       <Flex direction="column" justify="center" sx={{ width: '50%' }}>
-        <Box sx={{ textAlign: 'center', marginBottom: '50px' }}>
+        <Box sx={{ textAlign: 'center', marginBottom: '28px' }}>
           <Title>Sign up</Title>
 
           <Text fz="lg" component="h3">
@@ -50,7 +50,7 @@ const AcademicPermormance: React.FC<IAcademicPermormanceProps> = ({
         </Box>
 
         <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <Select
               label="Major"
               placeholder="Pick your Major in university"
@@ -58,7 +58,7 @@ const AcademicPermormance: React.FC<IAcademicPermormanceProps> = ({
             />
           </Box>
 
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <TextInput
               placeholder="Write your Faculty"
               label="Faculty"
@@ -66,7 +66,7 @@ const AcademicPermormance: React.FC<IAcademicPermormanceProps> = ({
             />
           </Box>
 
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
             <NumberInput
               placeholder="Write your GPA"
               label="GPA"
@@ -77,7 +77,7 @@ const AcademicPermormance: React.FC<IAcademicPermormanceProps> = ({
             />
           </Box>
 
-          <Button type="submit" size="lg" variant="filled" fullWidth>
+          <Button type="submit" size="md" variant="filled" fullWidth>
             Next
           </Button>
         </Box>

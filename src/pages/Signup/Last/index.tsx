@@ -1,15 +1,8 @@
 import {
   Box,
   Button,
-  Flex,
-  PasswordInput,
-  TextInput,
-  Title,
-  Center,
   Text,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { FormWrapper } from '../FormWrapper';
 import { Link } from 'react-router-dom';
 
 const Last: React.FC = () => {
