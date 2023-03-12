@@ -15,7 +15,6 @@ import { AppLayout } from '~/components';
 
 interface ISignInFormValues {
   email: string;
-  fullName: string;
   password: string;
 }
 
@@ -23,7 +22,6 @@ const SignIn: React.FC = () => {
   const form = useForm<ISignInFormValues>({
     initialValues: {
       email: '',
-      fullName: '',
       password: '',
     },
   });
@@ -33,12 +31,22 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <AppLayout>
+    <AppLayout isAuthHeader={true}>
       <Container size="lg">
-        <Box sx={{ paddingTop: '150px' }}>
+        <Box sx={{ paddingTop: '100px' }}>
           <Flex gap={50}>
-            <img src="/assets/images/sign-in.png" alt="SignIn intro" />
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '50%' }}>
+              <img
+                src="/assets/images/sign-in.png"
+                alt="SignIn intro"
+                style={{
+                  width: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </Box>
+
+            <Flex direction="column" justify="center" sx={{ width: '50%' }}>
               <Title sx={{ textAlign: 'center', marginBottom: '50px' }}>
                 Sign in
               </Title>
@@ -50,14 +58,6 @@ const SignIn: React.FC = () => {
                     placeholder="Write your Email"
                     label="Email"
                     {...form.getInputProps('email')}
-                  />
-                </Box>
-
-                <Box sx={{ marginBottom: '20px' }}>
-                  <TextInput
-                    placeholder="Write your fullName"
-                    label="Full Name"
-                    {...form.getInputProps('fullName')}
                   />
                 </Box>
 
@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
                   <Text variant="link">Sign Up</Text>
                 </Link>
               </Center>
-            </Box>
+            </Flex>
           </Flex>
         </Box>
       </Container>
