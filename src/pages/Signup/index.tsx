@@ -8,12 +8,13 @@ import {
   IPersonalInfoFormValues,
 } from '~/types/sign-up';
 import { AcademicPermormance } from './AcademicPerformance';
+import { Last } from './Last';
 import { Main } from './Main';
 import { PersonalInfo } from './PersonalInfo';
 
 interface IFormData extends IMainFormValues, IPersonalInfoFormValues {}
 
-const forms = ['main', 'personal-info', 'academic-performance'];
+const forms = ['main', 'personal-info', 'academic-performance', 'last'];
 
 const SignUp: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -46,6 +47,8 @@ const SignUp: React.FC = () => {
         return <PersonalInfo onSubmit={handleSubmit} />;
       case 'academic-performance':
         return <AcademicPermormance onSubmit={handleSubmit} />;
+      case 'last':
+        return <Last />;
       default:
         return null;
     }
