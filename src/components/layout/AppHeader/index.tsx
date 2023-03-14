@@ -37,7 +37,7 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
 
                 <li>
                   <Button component={Link} to="/sign-in" radius="lg">
-                    Sign-in
+                    Sign in
                   </Button>
                 </li>
               </ul>

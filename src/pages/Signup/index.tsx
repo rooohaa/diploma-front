@@ -6,7 +6,7 @@ import {
   IMainFormValues,
   IPersonalInfoFormValues,
 } from "~/types/sign-up"
-import { AcademicPermormance } from "./AcademicPerformance"
+import { AcademicInfo } from "./AcademicInfo"
 import { Last } from "./Last"
 import { Main } from "./Main"
 import { PersonalInfo } from "./PersonalInfo"
@@ -52,8 +52,8 @@ const SignUp: React.FC = () => {
               <PersonalInfo onSubmit={handleSubmit} />
             </Stepper.Step>
 
-            <Stepper.Step label="Academic performance">
-              <AcademicPermormance onSubmit={handleSubmit} />
+            <Stepper.Step label="Academic information">
+              <AcademicInfo onSubmit={handleSubmit} />
             </Stepper.Step>
 
             <Stepper.Completed>
