@@ -1,16 +1,20 @@
-import { Button, Container } from '@mantine/core';
-import { Link } from 'react-router-dom';
-import { AppLogoLink } from 'components';
-import { HeaderWrapper } from './style';
+import { Button, Container, Flex } from "@mantine/core"
+import { Link } from "react-router-dom"
+import { AppLogoLink, ContactUsModal } from "components"
+import { HeaderWrapper } from "./style"
+import { useDisclosure } from "@mantine/hooks"
 
 interface IAppHeaderProps {
-  isAuth?: boolean;
+  isAuth?: boolean
 }
 
 const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
+  // Contact us modal state
+  const [opened, { open, close }] = useDisclosure(false)
+
   return (
     <HeaderWrapper>
-      <Container size="lg" style={{ width: '100%' }}>
+      <Container size="lg" style={{ width: "100%" }}>
         <div className="app-header-inner">
           <AppLogoLink />
 
@@ -30,23 +34,26 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
                 </li>
 
                 <li>
-                  <Link className="app-nav-link" to="/contacts">
-                    Contacts
-                  </Link>
-                </li>
+                  <Flex columnGap={16}>
+                    <Button variant="outline" radius="lg" onClick={open}>
+                      Contact us
+                    </Button>
 
-                <li>
-                  <Button component={Link} to="/sign-in" radius="lg">
-                    Sign in
-                  </Button>
+                    <Button component={Link} to="/sign-in" radius="lg">
+                      Sign in
+                    </Button>
+                  </Flex>
                 </li>
               </ul>
             </nav>
           ) : null}
         </div>
       </Container>
-    </HeaderWrapper>
-  );
-};
 
-export { AppHeader };
+      {/* Contact us modal */}
+      <ContactUsModal opened={opened} close={close} />
+    </HeaderWrapper>
+  )
+}
+
+export { AppHeader }

@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
-import { DashboardLayout } from './components/layout/DashboardLayout';
-import { Main, SignUp, SignIn } from './pages';
+import { Routes, Route } from "react-router-dom"
+import { DashboardLayout } from "./components/layout/DashboardLayout"
+import { Main, SignUp, SignIn } from "./pages"
 
 const App: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         }
       />
     </Routes>
-  );
-};
+  )
+}
 
-export default App;
+export default App

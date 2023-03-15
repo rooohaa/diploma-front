@@ -6,4 +6,8 @@ const passwordRule = (password: string) => {
   return password.length > 6 ? null : "Invalid password"
 }
 
-export { emailRule, passwordRule }
+const requiredRule = (value: string) => {
+  return value.trim() !== "" ? null : "Required field"
+}
+
+export { emailRule, passwordRule, requiredRule }
