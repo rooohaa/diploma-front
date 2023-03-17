@@ -13,9 +13,9 @@ import { useForm } from "@mantine/form"
 import { FormWrapper } from "../FormWrapper"
 import { Link } from "react-router-dom"
 import { IMainFormValues } from "~/types/sign-up"
-import { emailRule, passwordRule } from "~/utils/formRules";
-import { supabase } from "~/supabaseClient";
-import { showNotification } from "@mantine/notifications";
+import { emailRule, passwordRule } from "~/utils/formRules"
+import { supabase } from "~/supabaseClient"
+import { showNotification } from "@mantine/notifications"
 
 interface IMainProps {
   onSubmit: (values: IMainFormValues) => void
@@ -30,24 +30,25 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
     validate: {
       email: emailRule,
       password: passwordRule,
-    }
+    },
   })
 
   // Sign up (auth table)
-  const handleSubmit = async (values: IMainFormValues) => {
+  const handleSubmit = async ({ email, password }: IMainFormValues) => {
     const { data, error } = await supabase.auth.signUp({
-      ...values
-    });
+      email,
+      password,
+    })
 
     if (error) {
       showNotification({
         message: error.message,
         autoClose: 5000,
         color: "red",
-      });
+      })
     } else {
       // Implement signup
-      const { user, session } = data;
+      const { user, session } = data
     }
   }
 
