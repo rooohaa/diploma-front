@@ -1,13 +1,12 @@
 export interface IMainFormValues {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 export interface IPersonalInfoFormValues {
   fullName: string;
   lastName: string;
-  birthDate: string;
+  age: number | null;
   phoneNumber: string;
 }
 

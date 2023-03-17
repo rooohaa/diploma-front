@@ -1,38 +1,20 @@
 import { Box, Container, Stepper } from "@mantine/core"
 import { useState } from "react"
 import { AppLayout } from "~/components"
-import {
-  IAcademicPerformanceFormValues,
-  IMainFormValues,
-  IPersonalInfoFormValues,
-} from "~/types/sign-up"
 import { AcademicInfo } from "./AcademicInfo"
 import { Last } from "./Last"
 import { Main } from "./Main"
 import { PersonalInfo } from "./PersonalInfo"
 
-interface IFormData extends IMainFormValues, IPersonalInfoFormValues {}
-
 const forms = ["main", "personal-info", "academic-performance", "last"]
 
 const SignUp: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState<IFormData | {}>({})
 
   const handleMoveNext = () => {
     if (currentStep < forms.length - 1) {
       setCurrentStep(currentStep + 1)
     }
-  }
-
-  const handleSubmit = (
-    values:
-      | IMainFormValues
-      | IPersonalInfoFormValues
-      | IAcademicPerformanceFormValues
-  ) => {
-    setFormData({ ...formData, ...values })
-    handleMoveNext()
   }
 
   return (
@@ -45,15 +27,15 @@ const SignUp: React.FC = () => {
             allowNextStepsSelect={false}
           >
             <Stepper.Step label="Create an account">
-              <Main onSubmit={handleSubmit} />
+              <Main onSubmit={handleMoveNext} />
             </Stepper.Step>
 
             <Stepper.Step label="Personal information">
-              <PersonalInfo onSubmit={handleSubmit} />
+              <PersonalInfo onSubmit={handleMoveNext} />
             </Stepper.Step>
 
             <Stepper.Step label="Academic information">
-              <AcademicInfo onSubmit={handleSubmit} />
+              <AcademicInfo onSubmit={handleMoveNext} />
             </Stepper.Step>
 
             <Stepper.Completed>

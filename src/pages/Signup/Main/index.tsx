@@ -13,6 +13,9 @@ import { useForm } from "@mantine/form"
 import { FormWrapper } from "../FormWrapper"
 import { Link } from "react-router-dom"
 import { IMainFormValues } from "~/types/sign-up"
+import { emailRule, passwordRule } from "~/utils/formRules";
+import { supabase } from "~/supabaseClient";
+import { showNotification } from "@mantine/notifications";
 
 interface IMainProps {
   onSubmit: (values: IMainFormValues) => void
@@ -23,12 +26,29 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
     initialValues: {
       email: "",
       password: "",
-      confirmPassword: "",
     },
+    validate: {
+      email: emailRule,
+      password: passwordRule,
+    }
   })
 
-  const handleSubmit = (values: IMainFormValues) => {
-    onSubmit(values)
+  // Sign up (auth table)
+  const handleSubmit = async (values: IMainFormValues) => {
+    const { data, error } = await supabase.auth.signUp({
+      ...values
+    });
+
+    if (error) {
+      showNotification({
+        message: error.message,
+        autoClose: 5000,
+        color: "red",
+      });
+    } else {
+      // Implement signup
+      const { user, session } = data;
+    }
   }
 
   return (
@@ -55,14 +75,6 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
                 label="Password"
                 description="Password must be more than 6 character"
                 {...form.getInputProps("password")}
-              />
-            </Box>
-
-            <Box sx={{ marginBottom: "16px" }}>
-              <PasswordInput
-                placeholder="Enter password confirmation"
-                label="Confrim password"
-                {...form.getInputProps("confirmPassword")}
               />
             </Box>
 

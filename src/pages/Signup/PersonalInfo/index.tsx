@@ -1,5 +1,4 @@
-import { Box, Button, Card, Flex, Text, TextInput, Title } from "@mantine/core"
-import { DatePicker } from "@mantine/dates"
+import { Box, Button, Card, Flex, NumberInput, Text, TextInput, Title } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { IPersonalInfoFormValues } from "~/types/sign-up"
 import { FormWrapper } from "../FormWrapper"
@@ -13,7 +12,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
     initialValues: {
       fullName: "",
       lastName: "",
-      birthDate: "",
+      age: null,
       phoneNumber: "",
     },
   })
@@ -52,10 +51,12 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
             </Box>
 
             <Box sx={{ marginBottom: "16px" }}>
-              <DatePicker
-                placeholder="Enter birthdate"
-                label="Birth Date"
-                {...form.getInputProps("birthDate")}
+              <NumberInput
+                placeholder="Enter age"
+                label="Age"
+                min={18}
+                max={100}
+                {...form.getInputProps("age")}
               />
             </Box>
 
