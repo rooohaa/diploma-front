@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import { DashboardLayout } from "./components/layout/DashboardLayout"
 import { PrivateRoutes } from "./components/system/PrivateRoutes"
 import { useAppDispatch } from "./hooks/useAppDispatch"
 import { useMe } from "./hooks/useMe"
