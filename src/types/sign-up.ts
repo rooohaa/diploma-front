@@ -5,7 +5,6 @@ export interface IMainFormValues {
 
 export interface IPersonalInfoFormValues {
   fullName: string;
-  lastName: string;
   age: number | null;
   phoneNumber: string;
 }

@@ -1,8 +1,9 @@
-import { Button, Container, Flex } from "@mantine/core"
+import { Avatar, Button, Container, Flex } from "@mantine/core"
 import { Link } from "react-router-dom"
 import { AppLogoLink, ContactUsModal } from "components"
 import { HeaderWrapper } from "./style"
 import { useDisclosure } from "@mantine/hooks"
+import { useAuth } from "~/hooks/useAuth"
 
 interface IAppHeaderProps {
   isAuth?: boolean
@@ -11,6 +12,7 @@ interface IAppHeaderProps {
 const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
   // Contact us modal state
   const [opened, { open, close }] = useDisclosure(false)
+  const auth = useAuth()
 
   return (
     <HeaderWrapper>
@@ -39,9 +41,18 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
                       Contact us
                     </Button>
 
-                    <Button component={Link} to="/sign-in" radius="lg">
-                      Sign in
-                    </Button>
+                    {auth ? (
+                      <Avatar
+                        src={null}
+                        alt="User avatar"
+                        color="red"
+                        radius="xl"
+                      />
+                    ) : (
+                      <Button component={Link} to="/sign-in" radius="lg">
+                        Sign in
+                      </Button>
+                    )}
                   </Flex>
                 </li>
               </ul>

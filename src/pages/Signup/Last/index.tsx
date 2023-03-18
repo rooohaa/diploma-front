@@ -24,7 +24,7 @@ const Last: React.FC = () => {
 
       <Box sx={{ marginBottom: '20px' }}>
         <Button
-          to="/"
+          to="/dashboard"
           component={Link}
           size="lg"
           maw={500}

@@ -1,24 +1,26 @@
 import {
   Box,
   Button,
+  Card,
+  Center,
   Flex,
   PasswordInput,
+  Text,
   TextInput,
   Title,
-  Center,
-  Text,
-  Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { FormWrapper } from "../FormWrapper"
+import { showNotification } from "@mantine/notifications"
 import { Link } from "react-router-dom"
+import { useAppDispatch } from "~/hooks/useAppDispatch"
+import { setUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { IMainFormValues } from "~/types/sign-up"
 import { emailRule, passwordRule } from "~/utils/formRules"
-import { supabase } from "~/supabaseClient"
-import { showNotification } from "@mantine/notifications"
+import { FormWrapper } from "../FormWrapper"
 
 interface IMainProps {
-  onSubmit: (values: IMainFormValues) => void
+  onSubmit: () => void
 }
 
 const Main: React.FC<IMainProps> = ({ onSubmit }) => {
@@ -32,6 +34,7 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
       password: passwordRule,
     },
   })
+  const dispatch = useAppDispatch()
 
   // Sign up (auth table)
   const handleSubmit = async ({ email, password }: IMainFormValues) => {
@@ -49,6 +52,13 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
     } else {
       // Implement signup
       const { user, session } = data
+
+      if (user && session) {
+        dispatch(setUser({ user, session }))
+
+        // Go to next step;
+        onSubmit()
+      }
     }
   }
 

@@ -10,15 +10,19 @@ import {
   Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { useAppSelector } from "~/hooks/useAppSelector"
+import { selectUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { IAcademicPerformanceFormValues } from "~/types/sign-up"
 import { FormWrapper } from "../FormWrapper"
 import { majorOptions } from "./mock"
 
 interface IAcademicInfoProps {
-  onSubmit: (values: IAcademicPerformanceFormValues) => void
+  onSubmit: () => void
 }
 
 const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
+  const user = useAppSelector(selectUser)
   const form = useForm<IAcademicPerformanceFormValues>({
     initialValues: {
       major: "",
@@ -27,8 +31,21 @@ const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
     },
   })
 
-  const handleSubmit = (values: IAcademicPerformanceFormValues) => {
-    onSubmit(values)
+  const handleSubmit = async (values: IAcademicPerformanceFormValues) => {
+    const payload = {
+      ...values,
+      user_id: user?.id,
+    }
+
+    const { data, error } = await supabase
+      .from("academic-information")
+      .insert([payload])
+
+    console.log(data, error)
+
+    if (!error) {
+      onSubmit()
+    }
   }
 
   return (
@@ -51,6 +68,7 @@ const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
                 data={majorOptions}
                 searchable
                 nothingFound="Major not found"
+                {...form.getInputProps("major")}
               />
             </Box>
 

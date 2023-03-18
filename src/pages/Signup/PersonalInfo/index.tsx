@@ -1,24 +1,48 @@
-import { Box, Button, Card, Flex, NumberInput, Text, TextInput, Title } from "@mantine/core"
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  NumberInput,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { useAppSelector } from "~/hooks/useAppSelector"
+import { selectUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { IPersonalInfoFormValues } from "~/types/sign-up"
 import { FormWrapper } from "../FormWrapper"
 
 interface IPersonalInfoProps {
-  onSubmit: (values: IPersonalInfoFormValues) => void
+  onSubmit: () => void
 }
 
 const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
   const form = useForm<IPersonalInfoFormValues>({
     initialValues: {
       fullName: "",
-      lastName: "",
       age: null,
       phoneNumber: "",
     },
   })
+  const user = useAppSelector(selectUser)
 
-  const handleSubmit = (values: IPersonalInfoFormValues) => {
-    onSubmit(values)
+  const handleSubmit = async (values: IPersonalInfoFormValues) => {
+    const { fullName, age, phoneNumber } = values
+
+    const { data, error } = await supabase
+      .from("users")
+      .insert([
+        { id: user?.id, full_name: fullName, phone_number: phoneNumber, age },
+      ])
+
+    console.log(data, error)
+
+    if (!error) {
+      onSubmit()
+    }
   }
 
   return (

@@ -11,8 +11,12 @@ import {
   Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { Link } from "react-router-dom"
+import { showNotification } from "@mantine/notifications"
+import { Link, useNavigate } from "react-router-dom"
 import { AppLayout } from "~/components"
+import { useAppDispatch } from "~/hooks/useAppDispatch"
+import { setUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { emailRule, passwordRule } from "~/utils/formRules"
 
 interface ISignInFormValues {
@@ -21,6 +25,8 @@ interface ISignInFormValues {
 }
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const form = useForm<ISignInFormValues>({
     initialValues: {
       email: "",
@@ -32,8 +38,31 @@ const SignIn: React.FC = () => {
     },
   })
 
-  const handleSubmit = (values: ISignInFormValues) => {
-    console.log(values)
+  // Login
+  const handleSubmit = async (values: ISignInFormValues) => {
+    const { email, password } = values
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      showNotification({
+        autoClose: 5000,
+        color: "red",
+        message: error.message,
+      })
+    } else {
+      if (data.session && data.user) {
+        dispatch(
+          setUser({
+            session: data.session,
+            user: data.user,
+          })
+        )
+        navigate("/dashboard")
+      }
+    }
   }
 
   return (
