@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Select,
   Text,
   TextInput,
   Title,
@@ -10,12 +9,12 @@ import {
   Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { useState } from "react"
 import { useAppSelector } from "~/hooks/useAppSelector"
 import { selectUser } from "~/store/reducers/authReducer"
 import { supabase } from "~/supabaseClient"
 import { IAcademicPerformanceFormValues } from "~/types/sign-up"
 import { FormWrapper } from "../FormWrapper"
-import { majorOptions } from "./mock"
 
 interface IAcademicInfoProps {
   onSubmit: () => void
@@ -23,9 +22,10 @@ interface IAcademicInfoProps {
 
 const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
   const user = useAppSelector(selectUser)
+  const [loading, setLoading] = useState(false)
   const form = useForm<IAcademicPerformanceFormValues>({
     initialValues: {
-      major: "",
+      advisor: "",
       faculty: "",
       gpa: "",
     },
@@ -34,14 +34,16 @@ const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
   const handleSubmit = async (values: IAcademicPerformanceFormValues) => {
     const payload = {
       ...values,
-      user_id: user?.id,
+      student_id: user?.id,
     }
 
-    const { data, error } = await supabase
-      .from("academic-information")
+    setLoading(true)
+
+    const { error } = await supabase
+      .from("academic_information")
       .insert([payload])
 
-    console.log(data, error)
+    setLoading(false)
 
     if (!error) {
       onSubmit()
@@ -62,20 +64,10 @@ const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
 
           <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
             <Box sx={{ marginBottom: "16px" }}>
-              <Select
-                label="Major"
-                placeholder="Pick major"
-                data={majorOptions}
-                searchable
-                nothingFound="Major not found"
-                {...form.getInputProps("major")}
-              />
-            </Box>
-
-            <Box sx={{ marginBottom: "16px" }}>
               <TextInput
                 placeholder="Enter faculty"
                 label="Faculty"
+                required
                 {...form.getInputProps("faculty")}
               />
             </Box>
@@ -87,11 +79,27 @@ const AcademicInfo: React.FC<IAcademicInfoProps> = ({ onSubmit }) => {
                 precision={2}
                 min={0}
                 max={4}
+                required
                 {...form.getInputProps("gpa")}
               />
             </Box>
 
-            <Button type="submit" size="md" variant="filled" fullWidth>
+            <Box sx={{ marginBottom: "16px" }}>
+              <TextInput
+                placeholder="Enter your advisor name"
+                label="Advisor"
+                required
+                {...form.getInputProps("advisor")}
+              />
+            </Box>
+
+            <Button
+              type="submit"
+              size="md"
+              variant="filled"
+              fullWidth
+              loading={loading}
+            >
               Next
             </Button>
           </Box>

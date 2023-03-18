@@ -11,6 +11,7 @@ import {
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { showNotification } from "@mantine/notifications"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useAppDispatch } from "~/hooks/useAppDispatch"
 import { setUser } from "~/store/reducers/authReducer"
@@ -24,6 +25,7 @@ interface IMainProps {
 }
 
 const Main: React.FC<IMainProps> = ({ onSubmit }) => {
+  const [loading, setLoading] = useState(false)
   const form = useForm<IMainFormValues>({
     initialValues: {
       email: "",
@@ -38,10 +40,14 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
 
   // Sign up (auth table)
   const handleSubmit = async ({ email, password }: IMainFormValues) => {
+    setLoading(true)
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     })
+
+    setLoading(false)
 
     if (error) {
       showNotification({
@@ -89,7 +95,13 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
               />
             </Box>
 
-            <Button type="submit" size="md" variant="filled" fullWidth>
+            <Button
+              type="submit"
+              size="md"
+              variant="filled"
+              fullWidth
+              loading={loading}
+            >
               Next
             </Button>
           </Box>
