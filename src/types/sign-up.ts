@@ -1,18 +1,17 @@
 export interface IMainFormValues {
-  email: string;
-  password: string;
-  confirmPassword: string;
+  email: string
+  password: string
 }
 
 export interface IPersonalInfoFormValues {
-  fullName: string;
-  lastName: string;
-  birthDate: string;
-  phoneNumber: string;
+  firstName: string
+  lastName: string
+  birthdate: Date | null
+  phoneNumber: string
 }
 
 export interface IAcademicPerformanceFormValues {
-  major: string;
-  faculty: string;
-  gpa: string;
+  advisor: string
+  faculty: string
+  gpa: string
 }

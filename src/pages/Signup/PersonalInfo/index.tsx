@@ -1,25 +1,53 @@
 import { Box, Button, Card, Flex, Text, TextInput, Title } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
 import { useForm } from "@mantine/form"
+import dayjs from "dayjs"
+import { useState } from "react"
+import { useAppSelector } from "~/hooks/useAppSelector"
+import { selectUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { IPersonalInfoFormValues } from "~/types/sign-up"
 import { FormWrapper } from "../FormWrapper"
 
 interface IPersonalInfoProps {
-  onSubmit: (values: IPersonalInfoFormValues) => void
+  onSubmit: () => void
 }
 
 const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
+  const [loading, setLoading] = useState(false)
   const form = useForm<IPersonalInfoFormValues>({
     initialValues: {
-      fullName: "",
+      firstName: "",
       lastName: "",
-      birthDate: "",
+      birthdate: null,
       phoneNumber: "",
     },
   })
+  const user = useAppSelector(selectUser)
 
-  const handleSubmit = (values: IPersonalInfoFormValues) => {
-    onSubmit(values)
+  const handleSubmit = async (values: IPersonalInfoFormValues) => {
+    const { firstName, lastName, birthdate, phoneNumber } = values
+
+    const payload = {
+      student_id: user?.id,
+      email: user?.email,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      birthdate: dayjs(birthdate).format("YYYY-MM-DD"),
+    }
+
+    setLoading(true)
+
+    const { error } = await supabase
+      .from("personal_information")
+      .insert([payload])
+
+    setLoading(false)
+
+    if (!error) {
+      onSubmit()
+    }
   }
 
   return (
@@ -37,9 +65,19 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
           <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
             <Box sx={{ marginBottom: "16px" }}>
               <TextInput
-                placeholder="Enter fullname"
-                label="Full Name"
-                {...form.getInputProps("fullName")}
+                placeholder="Enter firstname"
+                label="First Name"
+                required
+                {...form.getInputProps("firstName")}
+              />
+            </Box>
+
+            <Box sx={{ marginBottom: "16px" }}>
+              <TextInput
+                placeholder="Enter lastname"
+                label="Last Name"
+                required
+                {...form.getInputProps("lastName")}
               />
             </Box>
 
@@ -47,6 +85,7 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
               <TextInput
                 placeholder="Enter phone number"
                 label="Phone Number"
+                required
                 {...form.getInputProps("phoneNumber")}
               />
             </Box>
@@ -55,11 +94,18 @@ const PersonalInfo: React.FC<IPersonalInfoProps> = ({ onSubmit }) => {
               <DatePicker
                 placeholder="Enter birthdate"
                 label="Birth Date"
-                {...form.getInputProps("birthDate")}
+                required
+                {...form.getInputProps("birthdate")}
               />
             </Box>
 
-            <Button type="submit" size="md" variant="filled" fullWidth>
+            <Button
+              type="submit"
+              size="md"
+              variant="filled"
+              fullWidth
+              loading={loading}
+            >
               Next
             </Button>
           </Box>

@@ -1,34 +1,71 @@
 import {
   Box,
   Button,
+  Card,
+  Center,
   Flex,
   PasswordInput,
+  Text,
   TextInput,
   Title,
-  Center,
-  Text,
-  Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { FormWrapper } from "../FormWrapper"
+import { showNotification } from "@mantine/notifications"
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useAppDispatch } from "~/hooks/useAppDispatch"
+import { setUser } from "~/store/reducers/authReducer"
+import { supabase } from "~/supabaseClient"
 import { IMainFormValues } from "~/types/sign-up"
+import { emailRule, passwordRule } from "~/utils/formRules"
+import { FormWrapper } from "../FormWrapper"
 
 interface IMainProps {
-  onSubmit: (values: IMainFormValues) => void
+  onSubmit: () => void
 }
 
 const Main: React.FC<IMainProps> = ({ onSubmit }) => {
+  const [loading, setLoading] = useState(false)
   const form = useForm<IMainFormValues>({
     initialValues: {
       email: "",
       password: "",
-      confirmPassword: "",
+    },
+    validate: {
+      email: emailRule,
+      password: passwordRule,
     },
   })
+  const dispatch = useAppDispatch()
 
-  const handleSubmit = (values: IMainFormValues) => {
-    onSubmit(values)
+  // Sign up (auth table)
+  const handleSubmit = async ({ email, password }: IMainFormValues) => {
+    setLoading(true)
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+
+    setLoading(false)
+
+    if (error) {
+      showNotification({
+        message: error.message,
+        autoClose: 5000,
+        color: "red",
+      })
+    } else {
+      // Implement signup
+      const { user, session } = data
+
+      if (user && session) {
+        dispatch(setUser({ user, session }))
+
+        // Go to next step;
+        onSubmit()
+      }
+    }
   }
 
   return (
@@ -58,15 +95,13 @@ const Main: React.FC<IMainProps> = ({ onSubmit }) => {
               />
             </Box>
 
-            <Box sx={{ marginBottom: "16px" }}>
-              <PasswordInput
-                placeholder="Enter password confirmation"
-                label="Confrim password"
-                {...form.getInputProps("confirmPassword")}
-              />
-            </Box>
-
-            <Button type="submit" size="md" variant="filled" fullWidth>
+            <Button
+              type="submit"
+              size="md"
+              variant="filled"
+              fullWidth
+              loading={loading}
+            >
               Next
             </Button>
           </Box>

@@ -11,8 +11,15 @@ import {
   Card,
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
-import { Link } from "react-router-dom"
+import { showNotification } from "@mantine/notifications"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { AppLayout } from "~/components"
+import { useAppDispatch } from "~/hooks/useAppDispatch"
+import { setUser } from "~/store/reducers/authReducer"
+import { setPersonalInfo } from "~/store/reducers/personReducer"
+import { supabase } from "~/supabaseClient"
+import { IPerson } from "~/types/person"
 import { emailRule, passwordRule } from "~/utils/formRules"
 
 interface ISignInFormValues {
@@ -21,6 +28,9 @@ interface ISignInFormValues {
 }
 
 const SignIn: React.FC = () => {
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const form = useForm<ISignInFormValues>({
     initialValues: {
       email: "",
@@ -32,8 +42,55 @@ const SignIn: React.FC = () => {
     },
   })
 
-  const handleSubmit = (values: ISignInFormValues) => {
-    console.log(values)
+  // Login
+  const handleSubmit = async (values: ISignInFormValues) => {
+    const { email, password } = values
+
+    setLoading(true)
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    setLoading(false)
+
+    if (error) {
+      showNotification({
+        autoClose: 5000,
+        color: "red",
+        message: error.message,
+      })
+    } else {
+      if (data.session && data.user) {
+        // fetch personal info then set user & personal info in store
+        const { data: personalInfo, error: personalInfoErr } = await supabase
+          .from("personal_information")
+          .select("*")
+          .eq("student_id", data.user.id)
+
+        const { birthdate, first_name, last_name, phone_number, email } =
+          personalInfo![0]
+
+        const person: IPerson = {
+          firstName: first_name,
+          lastName: last_name,
+          birthdate,
+          phoneNumber: phone_number,
+          email,
+        }
+
+        dispatch(
+          setUser({
+            session: data.session,
+            user: data.user,
+          })
+        )
+        dispatch(setPersonalInfo({ person }))
+
+        navigate("/dashboard")
+      }
+    }
   }
 
   return (
@@ -77,7 +134,13 @@ const SignIn: React.FC = () => {
                     />
                   </Box>
 
-                  <Button type="submit" size="md" variant="filled" fullWidth>
+                  <Button
+                    type="submit"
+                    size="md"
+                    variant="filled"
+                    fullWidth
+                    loading={loading}
+                  >
                     Sign in
                   </Button>
                 </Box>
