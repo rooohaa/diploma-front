@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import { DashboardLayout } from "./components/layout/DashboardLayout"
+import { PrivateRoutes } from "./components/system/PrivateRoutes"
 import { useAppDispatch } from "./hooks/useAppDispatch"
 import { useMe } from "./hooks/useMe"
 import { Main, SignUp, SignIn } from "./pages"
@@ -17,6 +17,7 @@ const App: React.FC = () => {
     auth()
   }, [])
 
+  // authorize if session exists on page reload
   const auth = async () => {
     const { data, error } = await supabase.auth.getSession()
 
@@ -49,18 +50,21 @@ const App: React.FC = () => {
       <Route path="/" element={<Main />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route
-        path="/dashboard"
-        element={
-          <DashboardLayout>
-            {!!user ? (
-              <div>Authenticated as : {user.email}</div>
-            ) : (
-              <div>not authenticated</div>
-            )}
-          </DashboardLayout>
-        }
-      />
+
+      <Route element={<PrivateRoutes redirectPath="/sign-in" />}>
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              {!!user ? (
+                <div>Authenticated as : {user.email}</div>
+              ) : (
+                <div>not authenticated</div>
+              )}
+            </>
+          }
+        />
+      </Route>
     </Routes>
   )
 }
