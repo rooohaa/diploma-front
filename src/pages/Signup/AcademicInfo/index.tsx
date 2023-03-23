@@ -10,10 +10,10 @@ import {
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useState } from "react"
-import { useAppSelector } from "~/hooks/useAppSelector"
-import { selectUser } from "~/store/reducers/authReducer"
-import { supabase } from "~/supabaseClient"
-import { IAcademicPerformanceFormValues } from "~/types/sign-up"
+import { useAppSelector } from "hooks/useAppSelector"
+import { selectUser } from "store/reducers/authReducer"
+import { supabase } from "supabaseClient"
+import { IAcademicPerformanceFormValues } from "types/sign-up"
 import { FormWrapper } from "../FormWrapper"
 
 interface IAcademicInfoProps {

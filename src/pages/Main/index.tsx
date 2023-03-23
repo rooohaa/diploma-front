@@ -1,8 +1,8 @@
-import { Flex } from '@mantine/core';
-import { Container, Title, Text, Button } from '@mantine/core';
-import { AppLayout } from 'components';
-import { Link } from 'react-router-dom';
-import { MainSection } from './style';
+import { Flex } from "@mantine/core"
+import { Container, Title, Text, Button } from "@mantine/core"
+import { Link } from "react-router-dom"
+import { AppLayout } from "components/layout"
+import { MainSection } from "./style"
 
 const Main: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const Main: React.FC = () => {
               direction="column"
               align="flex-start"
               gap="xl"
-              sx={{ maxWidth: '500px', paddingTop: '60px' }}
+              sx={{ maxWidth: "500px", paddingTop: "60px" }}
             >
               <Title color="#2A3240" order={1}>
                 Student ID Card Management System
@@ -35,7 +35,7 @@ const Main: React.FC = () => {
         </Container>
       </MainSection>
     </AppLayout>
-  );
-};
+  )
+}
 
-export { Main };
+export { Main }

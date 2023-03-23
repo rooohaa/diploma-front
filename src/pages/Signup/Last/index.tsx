@@ -3,12 +3,11 @@ import { showNotification } from "@mantine/notifications"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Check } from "tabler-icons-react"
-import { useAppDispatch } from "~/hooks/useAppDispatch"
-import { useMe } from "~/hooks/useMe"
-import { setUser } from "~/store/reducers/authReducer"
-import { setPersonalInfo } from "~/store/reducers/personReducer"
-import { supabase } from "~/supabaseClient"
-import { IPerson } from "~/types/person"
+import { useAppDispatch } from "hooks/useAppDispatch"
+import { useMe } from "hooks/useMe"
+import { setPersonalInfo } from "store/reducers/personReducer"
+import { supabase } from "supabaseClient"
+import { IPerson } from "types/person"
 
 const Last: React.FC = () => {
   const [loading, setLoading] = useState(false)
