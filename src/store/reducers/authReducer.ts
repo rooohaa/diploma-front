@@ -11,7 +11,7 @@ interface IAuthState {
 const initialState: IAuthState = {
   session: null,
   user: null,
-  isLoggedIn: false,
+  isLoggedIn: !!localStorage.getItem("sb-yvtzvvsoireabyashcwx-auth-token"),
 }
 
 const authSlice = createSlice({
