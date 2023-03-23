@@ -88,7 +88,7 @@ const SignIn: React.FC = () => {
         )
         dispatch(setPersonalInfo({ person }))
 
-        navigate("/dashboard")
+        navigate("/dashboard/user")
       }
     }
   }

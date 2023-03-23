@@ -1,9 +1,25 @@
 import { AppShell, Navbar, Header } from "@mantine/core"
-import { AppLogoLink } from "components/ui"
+import { AppLogoLink, NavBarLink } from "components/ui"
+import { Notes, UserCircle } from "tabler-icons-react"
 
 interface IDashboardLayoutProps {
   children: React.ReactNode
 }
+
+const links = [
+  {
+    color: "#ffffff",
+    label: "Profile",
+    icon: <UserCircle />,
+    path: "/dashboard/user",
+  },
+  {
+    color: "#ffffff",
+    label: "Task traker",
+    icon: <Notes />,
+    path: "/dashboard/task-tracker",
+  },
+]
 
 const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
   return (
@@ -11,7 +27,11 @@ const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
       padding="md"
       navbar={
         <Navbar width={{ base: 300 }} p="xs">
-          <div>navbar</div>
+          <Navbar.Section>
+            {links.map((link) => (
+              <NavBarLink {...link} key={link.label} />
+            ))}
+          </Navbar.Section>
         </Navbar>
       }
       header={
