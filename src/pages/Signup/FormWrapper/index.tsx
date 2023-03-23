@@ -1,20 +1,20 @@
-import { Box, Flex } from '@mantine/core';
+import { Box, Flex } from "@mantine/core"
 
 interface IFormWrapperProps {
-  children: React.ReactNode;
-  imagePath: string;
+  children: React.ReactNode
+  imagePath: string
 }
 const FormWrapper: React.FC<IFormWrapperProps> = ({ imagePath, children }) => {
   return (
-    <Box sx={{ paddingTop: '50px' }}>
+    <Box sx={{ paddingTop: "50px" }}>
       <Flex gap={50}>
-        <Box sx={{ width: '50%' }}>
+        <Box sx={{ width: "50%" }}>
           <img
             src={`/assets/images/${imagePath}`}
             alt="Sign up side image"
             style={{
-              width: '100%',
-              objectFit: 'cover',
+              width: "100%",
+              objectFit: "cover",
             }}
           />
         </Box>
@@ -22,7 +22,7 @@ const FormWrapper: React.FC<IFormWrapperProps> = ({ imagePath, children }) => {
         {children}
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export { FormWrapper };
+export { FormWrapper }

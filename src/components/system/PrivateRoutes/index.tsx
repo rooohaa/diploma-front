@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
 import { useAuth } from "hooks/useAuth"
-import { DashboardLayout } from "~/components/layout/DashboardLayout"
+import { DashboardLayout } from "components/layout"
 
 interface IPrivateRoutesProps {
   redirectPath: string

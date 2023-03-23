@@ -1,6 +1,5 @@
 import { Avatar, Button, Container, Flex, Menu } from "@mantine/core"
 import { Link, useNavigate } from "react-router-dom"
-import { AppLogoLink, ContactUsModal } from "components"
 import { HeaderWrapper } from "./style"
 import { useDisclosure } from "@mantine/hooks"
 import { useAuth } from "~/hooks/useAuth"
@@ -15,6 +14,8 @@ import {
 } from "~/store/reducers/personReducer"
 import { useAppSelector } from "~/hooks/useAppSelector"
 import { getUserInitials } from "~/utils/avatar"
+import { AppLogoLink } from "~/components/ui"
+import { ContactUsModal } from "~/components/domain"
 
 interface IAppHeaderProps {
   isAuth?: boolean

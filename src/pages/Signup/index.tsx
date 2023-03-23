@@ -1,6 +1,6 @@
 import { Box, Container, Stepper } from "@mantine/core"
 import { useState } from "react"
-import { AppLayout } from "~/components"
+import { AppLayout } from "components/layout"
 import { AcademicInfo } from "./AcademicInfo"
 import { Last } from "./Last"
 import { Main } from "./Main"
