@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import { PrivateRoutes } from "./components/system/PrivateRoutes"
-import { useAppDispatch } from "./hooks/useAppDispatch"
-import { useMe } from "./hooks/useMe"
-import { Main, SignUp, SignIn } from "./pages"
-import { setUser } from "./store/reducers/authReducer"
-import { setPersonalInfo } from "./store/reducers/personReducer"
-import { supabase } from "./supabaseClient"
-import { IPerson } from "./types/person"
+import { useAppDispatch } from "hooks/useAppDispatch"
+import { useMe } from "hooks/useMe"
+import { Main, SignUp, SignIn } from "pages"
+import { setUser } from "store/reducers/authReducer"
+import { setPersonalInfo } from "store/reducers/personReducer"
+import { supabase } from "supabaseClient"
+import { IPerson } from "types/person"
+import { PrivateRoutes } from "components/system"
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()

@@ -1,8 +1,8 @@
-import { AppShell, Navbar, Header } from '@mantine/core';
-import { AppLogoLink } from 'components';
+import { AppShell, Navbar, Header } from "@mantine/core"
+import { AppLogoLink } from "components/ui"
 
 interface IDashboardLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
@@ -22,7 +22,7 @@ const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
     >
       {children}
     </AppShell>
-  );
-};
+  )
+}
 
-export { DashboardLayout };
+export { DashboardLayout }

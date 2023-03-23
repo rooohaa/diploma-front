@@ -4,7 +4,7 @@ import { requiredRule } from "utils/formRules"
 import { showNotification } from "@mantine/notifications"
 import { useState } from "react"
 import { Check, X } from "tabler-icons-react"
-import { supabase } from "~/supabaseClient"
+import { supabase } from "supabaseClient"
 
 interface IContactUsModalProps {
   opened: boolean
