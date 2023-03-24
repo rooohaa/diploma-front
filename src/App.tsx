@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <Route element={<PrivateRoutes redirectPath="/sign-in" />}>
         <Route path="dashboard/*" element={<Outlet />}>
           <Route
-            path="user"
+            path="profile"
             element={<div>Authenticated as : {user?.email}</div>}
           />
           <Route path="task-tracker" element={<div>task-tracker</div>} />

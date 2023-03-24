@@ -11,7 +11,7 @@ const links = [
     color: "#ffffff",
     label: "Profile",
     icon: <UserCircle />,
-    path: "/dashboard/user",
+    path: "/dashboard/profile",
   },
   {
     color: "#ffffff",
