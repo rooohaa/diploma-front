@@ -1,11 +1,8 @@
 import { PrivateRoutes } from "components/system"
-import { useMe } from "hooks/useMe"
-import { Main, SignIn, SignUp } from "pages"
+import { Main, Profile, SignIn, SignUp, TaskTracker } from "pages"
 import { Outlet, Route, Routes } from "react-router-dom"
 
 const App: React.FC = () => {
-  const user = useMe()
-
   return (
     <Routes>
       <Route path="/" element={<Main />} />
@@ -14,11 +11,8 @@ const App: React.FC = () => {
 
       <Route element={<PrivateRoutes redirectPath="/sign-in" />}>
         <Route path="dashboard/*" element={<Outlet />}>
-          <Route
-            path="profile"
-            element={<div>Authenticated as : {user?.email}</div>}
-          />
-          <Route path="task-tracker" element={<div>task-tracker</div>} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="task-tracker" element={<TaskTracker />} />
         </Route>
       </Route>
     </Routes>

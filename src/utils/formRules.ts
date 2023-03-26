@@ -10,4 +10,8 @@ const requiredRule = (value: string) => {
   return value.trim() !== "" ? null : "Required field"
 }
 
-export { emailRule, passwordRule, requiredRule }
+const dateRule = (value: Date | string | null) => {
+  return value ? null : "Required field"
+}
+
+export { emailRule, passwordRule, requiredRule, dateRule }

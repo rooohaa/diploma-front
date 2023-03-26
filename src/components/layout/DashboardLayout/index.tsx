@@ -15,7 +15,7 @@ const links = [
   },
   {
     color: "#ffffff",
-    label: "Task traker",
+    label: "Task tracker",
     icon: <Notes />,
     path: "/dashboard/task-tracker",
   },
