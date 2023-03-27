@@ -7,40 +7,21 @@ import App from "./App"
 import "./index.css"
 import { Provider } from "react-redux"
 import store from "./store"
+import { theme } from "theme"
+import { AuthProvider } from "components/domain"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            fontFamily: "Open Sans, sans-serif",
-            fontFamilyMonospace: "Monaco, Courier, monospace",
-            headings: { fontFamily: "Open Sans, sans-serif" },
-            colors: {
-              "m-orange": [
-                "#CFAAA0",
-                "#CFA295",
-                "#CF9A8A",
-                "#D1917F",
-                "#D38872",
-                "#D77E65",
-                "#DD7456",
-                "#D47256",
-                "#CB7056",
-                "#C26E56",
-              ],
-            },
-            primaryColor: "m-orange",
-          }}
-        >
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <NotificationsProvider position="top-right">
-            <App />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </NotificationsProvider>
         </MantineProvider>
       </Provider>
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 )

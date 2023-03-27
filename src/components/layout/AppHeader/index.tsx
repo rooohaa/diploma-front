@@ -98,7 +98,7 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
 
                           <Menu.Item
                             icon={<LayoutDashboard size={14} />}
-                            onClick={() => handleNavigate("/dashboard")}
+                            onClick={() => handleNavigate("/dashboard/profile")}
                           >
                             My Dashboard
                           </Menu.Item>
