@@ -1,6 +1,7 @@
 import { AppShell, Navbar, Header } from "@mantine/core"
 import { AppLogoLink, NavBarLink } from "components/ui"
 import { Notes, UserCircle } from "tabler-icons-react"
+import { DailyAdviceModal } from "components/domain"
 
 interface IDashboardLayoutProps {
   children: React.ReactNode
@@ -41,6 +42,8 @@ const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
       }
     >
       {children}
+
+      <DailyAdviceModal />
     </AppShell>
   )
 }

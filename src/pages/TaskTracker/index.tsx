@@ -45,7 +45,7 @@ const TaskTracker: React.FC = () => {
   const user = useMe()
   const [opened, { open: openModal, close: closeModal }] = useDisclosure(false)
   const [visible, { open: openLoading, close: closeLoading }] =
-    useDisclosure(false)
+    useDisclosure(true)
   const [tasks, setTasks] = useState<ITask[]>([])
   const [modalValues, setModalValues] = useState<ITaskModalValue>({
     mode: "create",
@@ -239,7 +239,7 @@ const TaskTracker: React.FC = () => {
         )}
       </TaskTrackerWrapper>
 
-      <LoadingOverlay visible={visible} overlayBlur={2} />
+      <LoadingOverlay visible={visible} overlayBlur={5} />
 
       <TaskTrackerModal
         opened={opened}
