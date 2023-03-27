@@ -18,7 +18,8 @@ interface ITaskTrackerModalProps {
   opened: boolean
   formValues: ITaskModalValue
   onClose: () => void
-  onSave: (task: ITask, isEdit: boolean) => void
+  onSave: (task: ITask) => void
+  onDelete: (id: string) => void
 }
 
 export const modalDefaultValues: ITask = {
@@ -34,8 +35,10 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
   formValues,
   onClose,
   onSave,
+  onDelete,
 }) => {
   const isEdit = formValues.mode === "update"
+  const id = formValues.value.id
 
   const form = useForm<ITask>({
     initialValues: modalDefaultValues,
@@ -76,7 +79,7 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
       data.id = uuid()
     }
 
-    onSave(data, isEdit)
+    onSave(data)
     onClose()
   }
 
@@ -135,6 +138,17 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
         <Button type="submit" fullWidth>
           Save
         </Button>
+
+        {isEdit ? (
+          <Button
+            mt="xs"
+            fullWidth
+            variant="outline"
+            onClick={() => onDelete(id)}
+          >
+            Delete
+          </Button>
+        ) : null}
       </form>
     </Modal>
   )
