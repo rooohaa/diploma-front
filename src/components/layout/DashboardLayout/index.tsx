@@ -1,7 +1,7 @@
-import { AppShell, Navbar, Header } from "@mantine/core"
+import { AppShell, Navbar, Header, Flex } from "@mantine/core"
 import { AppLogoLink, NavBarLink } from "components/ui"
 import { Notes, UserCircle } from "tabler-icons-react"
-import { DailyAdviceModal } from "components/domain"
+import { DailyAdviceModal, UserAvatar } from "components/domain"
 
 interface IDashboardLayoutProps {
   children: React.ReactNode
@@ -37,7 +37,11 @@ const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
       }
       header={
         <Header height={60} p="xs">
-          <AppLogoLink />
+          <Flex align="center" justify="space-between">
+            <AppLogoLink />
+
+            <UserAvatar />
+          </Flex>
         </Header>
       }
     >
