@@ -4,6 +4,7 @@ import {
   Card,
   Flex,
   Grid,
+  Indicator,
   LoadingOverlay,
   Paper,
   Text,
@@ -14,7 +15,7 @@ import { showNotification } from "@mantine/notifications"
 import { useMe } from "hooks/useMe"
 import { useEffect, useState } from "react"
 import { supabase } from "supabaseClient"
-import { X } from "tabler-icons-react"
+import { Plus, X } from "tabler-icons-react"
 import { ITask, ITaskModalValue, TTaskStatus } from "types/task-tracker"
 import { getColor } from "utils/task-tracker"
 import { TaskTrackerWrapper } from "./style"
@@ -53,8 +54,28 @@ const TaskTracker: React.FC = () => {
   })
 
   useEffect(() => {
-    fetchTasks()
-  }, [])
+    if (user) fetchTasks()
+  }, [user])
+
+  const countTodoStatuses = () => {
+    let todoCount = 0
+    let inProgressCount = 0
+    let doneCount = 0
+
+    tasks.forEach(({ status }) => {
+      if (status === "todo") {
+        todoCount += 1
+      } else if (status === "progress") {
+        inProgressCount += 1
+      } else {
+        doneCount += 1
+      }
+    })
+
+    return { todo: todoCount, progress: inProgressCount, completed: doneCount }
+  }
+
+  const todoCountsMap = countTodoStatuses()
 
   const fetchTasks = async () => {
     openLoading()
@@ -193,9 +214,21 @@ const TaskTracker: React.FC = () => {
 
   return (
     <>
-      <Box ta="right" mb="sm">
-        <Button onClick={openCreate}>Create</Button>
-      </Box>
+      <Flex align="center" justify="space-between" mb="sm">
+        <Indicator
+          inline
+          label={tasks.length}
+          size={16}
+          processing
+          color="pink"
+        >
+          <Title order={2}>Task Tracker</Title>
+        </Indicator>
+
+        <Button leftIcon={<Plus />} onClick={openCreate}>
+          Create
+        </Button>
+      </Flex>
 
       <TaskTrackerWrapper>
         <Grid>
@@ -203,7 +236,9 @@ const TaskTracker: React.FC = () => {
             <Grid.Col key={type} span={4}>
               <Card radius="md">
                 <Flex justify="space-between" align="center">
-                  <Text fw={500}>{name}</Text>
+                  <Text fw={500}>
+                    {name} ({todoCountsMap[type]})
+                  </Text>
 
                   <Paper
                     w={12}
