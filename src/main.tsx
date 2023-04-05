@@ -9,6 +9,9 @@ import { Provider } from "react-redux"
 import store from "./store"
 import { theme } from "theme"
 import { AuthProvider } from "components/domain"
+import axios from "axios"
+
+axios.defaults.baseURL = `${import.meta.env.VITE_APP_API_URL}/api`
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
