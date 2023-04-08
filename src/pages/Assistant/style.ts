@@ -6,6 +6,7 @@ export const AssistantSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  row-gap: 16px;
 
   position: relative;
 
@@ -13,6 +14,10 @@ export const AssistantSection = styled.section`
     width: 100%;
     flex: 1;
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
   }
 
   .chat-form {
@@ -22,14 +27,9 @@ export const AssistantSection = styled.section`
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     background-color: #fff;
 
+    width: 100%;
     display: flex;
     align-items: center;
     column-gap: 8px;
-
-    position: fixed;
-    bottom: 0;
-    left: 300px;
-    right: 0;
-    z-index: 1000;
   }
 `
