@@ -1,4 +1,4 @@
-import { UserCircle, Notes, Robot } from "tabler-icons-react"
+import { UserCircle, Notes, Robot, Compass } from "tabler-icons-react"
 
 export const links = [
   {
@@ -15,5 +15,10 @@ export const links = [
     label: "AI Assistant",
     icon: <Robot />,
     path: "/dashboard/assistant",
+  },
+  {
+    label: "Career",
+    icon: <Compass />,
+    path: "/dashboard/career",
   },
 ]
