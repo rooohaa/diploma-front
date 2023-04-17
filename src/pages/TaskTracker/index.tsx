@@ -5,7 +5,7 @@ import {
   Flex,
   Grid,
   Indicator,
-  LoadingOverlay,
+  Loader,
   Paper,
   Text,
   Title,
@@ -45,7 +45,7 @@ const blocks: IBlock[] = [
 const TaskTracker: React.FC = () => {
   const user = useMe()
   const [opened, { open: openModal, close: closeModal }] = useDisclosure(false)
-  const [visible, { open: openLoading, close: closeLoading }] =
+  const [loading, { open: openLoading, close: closeLoading }] =
     useDisclosure(true)
   const [tasks, setTasks] = useState<ITask[]>([])
   const [modalValues, setModalValues] = useState<ITaskModalValue>({
@@ -214,67 +214,79 @@ const TaskTracker: React.FC = () => {
 
   return (
     <>
-      <Flex align="center" justify="space-between" mb="sm">
-        <Indicator
-          inline
-          label={tasks.length}
-          size={16}
-          processing
-          color="pink"
-        >
-          <Title order={2}>Task Tracker</Title>
-        </Indicator>
+      {loading ? (
+        <Flex justify="center" align="center" w="100%" h="100%">
+          <Loader />
+        </Flex>
+      ) : (
+        <Box>
+          <Flex align="center" justify="space-between" mb="sm">
+            <Indicator
+              inline
+              label={tasks.length}
+              size={16}
+              processing
+              color="red"
+              zIndex={10}
+            >
+              <Title order={2}>Task Tracker</Title>
+            </Indicator>
 
-        <Button leftIcon={<Plus />} onClick={openCreate}>
-          Create
-        </Button>
-      </Flex>
+            <Button
+              color="red"
+              variant="light"
+              leftIcon={<Plus />}
+              onClick={openCreate}
+            >
+              Create
+            </Button>
+          </Flex>
 
-      <TaskTrackerWrapper>
-        <Grid>
-          {blocks.map(({ type, name }) => (
-            <Grid.Col key={type} span={4}>
-              <Card radius="md">
-                <Flex justify="space-between" align="center">
-                  <Text fw={500}>
-                    {name} ({todoCountsMap[type]})
-                  </Text>
+          <TaskTrackerWrapper>
+            <Grid>
+              {blocks.map(({ type, name }) => (
+                <Grid.Col key={type} span={4}>
+                  <Card radius="md">
+                    <Flex justify="space-between" align="center">
+                      <Text fw={500}>
+                        {name} ({todoCountsMap[type]})
+                      </Text>
 
-                  <Paper
-                    w={12}
-                    h={12}
-                    radius="lg"
-                    shadow="sm"
-                    bg={getColor(type)}
-                  />
-                </Flex>
-              </Card>
-            </Grid.Col>
-          ))}
-        </Grid>
+                      <Paper
+                        w={12}
+                        h={12}
+                        radius="lg"
+                        shadow="sm"
+                        bg={getColor(type)}
+                      />
+                    </Flex>
+                  </Card>
+                </Grid.Col>
+              ))}
+            </Grid>
 
-        {tasks.length ? (
-          <Grid>
-            {blocks.map(({ type }) => (
-              <Grid.Col key={type} span={4}>
-                <TaskTrackerBlock
-                  tasks={filterTasks(type)}
-                  onTaskClick={openUpdate}
-                />
-              </Grid.Col>
-            ))}
-          </Grid>
-        ) : (
-          <Box sx={{ marginTop: "150px" }}>
-            <Title order={3} ta="center">
-              Hey!
-            </Title>
-            <Text ta="center">Add tasks to manage your goals!!!</Text>
-          </Box>
-        )}
-      </TaskTrackerWrapper>
-
-      <LoadingOverlay visible={visible} overlayBlur={5} />
+            {tasks.length ? (
+              <Grid>
+                {blocks.map(({ type }) => (
+                  <Grid.Col key={type} span={4}>
+                    <TaskTrackerBlock
+                      tasks={filterTasks(type)}
+                      onTaskClick={openUpdate}
+                    />
+                  </Grid.Col>
+                ))}
+              </Grid>
+            ) : (
+              <Box sx={{ marginTop: "150px" }}>
+                <Title order={3} ta="center">
+                  Hey!
+                </Title>
+                <Text ta="center">Add tasks to manage your goals!!!</Text>
+              </Box>
+            )}
+          </TaskTrackerWrapper>
+        </Box>
+      )}
 
       <TaskTrackerModal
         opened={opened}

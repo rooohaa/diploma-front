@@ -135,12 +135,13 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
           />
         </Box>
 
-        <Button type="submit" fullWidth>
+        <Button color="red" type="submit" fullWidth>
           Save
         </Button>
 
         {isEdit ? (
           <Button
+            color="red"
             mt="xs"
             fullWidth
             variant="outline"
