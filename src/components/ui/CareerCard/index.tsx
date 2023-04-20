@@ -1,20 +1,21 @@
-import { ActionIcon, Flex, Title } from "@mantine/core"
+import { ActionIcon, Card, Flex, Title } from "@mantine/core"
 import { Plus } from "tabler-icons-react"
-import { InfoSectionWrapper } from "./style"
 
-interface IInfoSectionProps {
+interface ICareerCardProps {
   title: string
   icon: React.ReactNode
   children: React.ReactNode
+  onAdd: () => void
 }
 
-const InfoSection: React.FC<IInfoSectionProps> = ({
+const CareerCard: React.FC<ICareerCardProps> = ({
   title,
   icon,
   children,
+  onAdd,
 }) => {
   return (
-    <InfoSectionWrapper>
+    <Card shadow="xs" p="md" radius="md">
       <Flex justify="space-between" align="center" p="xs">
         <Flex align="center" gap={4}>
           {icon}
@@ -25,15 +26,15 @@ const InfoSection: React.FC<IInfoSectionProps> = ({
         </Flex>
 
         <Flex gap="md">
-          <ActionIcon variant="light" color="red">
+          <ActionIcon variant="light" color="red" onClick={onAdd}>
             <Plus />
           </ActionIcon>
         </Flex>
       </Flex>
 
       {children}
-    </InfoSectionWrapper>
+    </Card>
   )
 }
 
-export { InfoSection }
+export { CareerCard }
