@@ -122,7 +122,7 @@ const Education: React.FC = () => {
     }
   }
 
-  const renderEducationItems = (item: IEducation) => {
+  const renderItems = (item: IEducation) => {
     const { id, university_name, major, degree, start_date, end_date } = item
     const startDate = formatDate(start_date, "MMM YYYY")
     const endDate = formatDate(end_date, "MMM YYYY")
@@ -149,7 +149,7 @@ const Education: React.FC = () => {
         <Container size="md">
           <CareerCard title="Education" icon={<Book2 />} onAdd={handleAdd}>
             {educations.length ? (
-              educations.map(renderEducationItems)
+              educations.map(renderItems)
             ) : (
               <Text ta="center">Go ahead and add your education</Text>
             )}

@@ -119,7 +119,7 @@ const Award: React.FC = () => {
     }
   }
 
-  const renderEducationItems = (item: IAward) => {
+  const renderItems = (item: IAward) => {
     const { id, award_name, issuer, date } = item
     const awardDate = formatDate(date, "DD MMM YYYY")
 
@@ -145,7 +145,7 @@ const Award: React.FC = () => {
         <Container size="md">
           <CareerCard title="Award" icon={<AwardIcon />} onAdd={handleAdd}>
             {awards.length ? (
-              awards.map(renderEducationItems)
+              awards.map(renderItems)
             ) : (
               <Text ta="center">Go ahead and add your award</Text>
             )}
