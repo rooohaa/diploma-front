@@ -1,6 +1,5 @@
 import { Avatar } from "@mantine/core"
 import { ChatMessageWrapper } from "./style"
-import { useMe } from "hooks/useMe"
 import { useAppSelector } from "hooks/useAppSelector"
 import { selectPersonalInfo } from "store/reducers/personReducer"
 import { getUserInitials } from "utils/avatar"

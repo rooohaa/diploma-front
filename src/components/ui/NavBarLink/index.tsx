@@ -7,9 +7,15 @@ interface NavBarLinkProps {
   path: string
   icon?: React.ReactNode
   color?: string
+  children?: React.ReactNode
 }
 
-const NavBarLink: React.FC<NavBarLinkProps> = ({ label, path, icon }) => {
+const NavBarLink: React.FC<NavBarLinkProps> = ({
+  label,
+  path,
+  icon,
+  children,
+}) => {
   const location = useLocation()
 
   return (
@@ -20,7 +26,9 @@ const NavBarLink: React.FC<NavBarLinkProps> = ({ label, path, icon }) => {
       component={Link}
       to={path}
       active={location.pathname === path}
-    />
+    >
+      {children}
+    </NavLink>
   )
 }
 
