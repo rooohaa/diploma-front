@@ -33,26 +33,12 @@ const Education: React.FC = () => {
       .eq("student_id", user?.id)
 
     if (error) {
-      showNotification({
-        color: "red",
-        message: error.message,
-        icon: <X />,
-        autoClose: 3000,
-      })
+      showError(error.message)
     } else {
       setEducations(data)
     }
 
     closeLoading()
-  }
-
-  const showError = (message: string) => {
-    showNotification({
-      color: "red",
-      message,
-      icon: <X />,
-      autoClose: 2000,
-    })
   }
 
   const handleCreate = async (education: IEducation) => {
@@ -108,6 +94,15 @@ const Education: React.FC = () => {
     const copy = educations.filter(({ id }) => id !== educationId)
     setEducations(copy)
     closeModal()
+  }
+
+  const showError = (message: string) => {
+    showNotification({
+      color: "red",
+      message,
+      icon: <X />,
+      autoClose: 2000,
+    })
   }
 
   const handleAdd = () => {

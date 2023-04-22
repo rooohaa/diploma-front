@@ -1,4 +1,4 @@
-import { Box } from "@mantine/core"
+import { Flex } from "@mantine/core"
 import { ITask, TTaskStatus } from "types/task-tracker"
 import { TaskTrackerCard } from "./TaskTrackerCard"
 
@@ -12,11 +12,11 @@ const TaskTrackerBlock: React.FC<ITaskTrackerBlockProps> = ({
   onTaskClick,
 }) => {
   return (
-    <Box>
+    <Flex direction="column" gap={8}>
       {tasks.map((task) => (
         <TaskTrackerCard key={task.id} content={task} onClick={onTaskClick} />
       ))}
-    </Box>
+    </Flex>
   )
 }
 

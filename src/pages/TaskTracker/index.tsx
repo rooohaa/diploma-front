@@ -277,7 +277,7 @@ const TaskTracker: React.FC = () => {
                 ))}
               </Grid>
             ) : (
-              <Box sx={{ marginTop: "150px" }}>
+              <Box my="lg">
                 <Title order={3} ta="center">
                   Hey!
                 </Title>

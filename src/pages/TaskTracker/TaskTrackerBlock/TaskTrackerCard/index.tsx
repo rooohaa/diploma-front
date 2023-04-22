@@ -19,7 +19,6 @@ const TaskTrackerCard: React.FC<ITaskTrackerCardProps> = ({
     <Card
       key={id}
       radius="md"
-      mb="sm"
       pos="relative"
       bg={getColor(status)}
       sx={{
