@@ -120,7 +120,7 @@ const Award: React.FC = () => {
   }
 
   const renderItems = (item: IAward) => {
-    const { id, award_name, issuer, date } = item
+    const { id, award_name, description, issuer, date } = item
     const awardDate = formatDate(date, "DD MMM YYYY")
 
     const content = {
@@ -128,6 +128,7 @@ const Award: React.FC = () => {
       title: award_name,
       subtitle: issuer,
       duriation: awardDate,
+      extra: description,
     }
 
     return (

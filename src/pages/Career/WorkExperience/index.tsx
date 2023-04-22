@@ -125,7 +125,8 @@ const WorkExperience: React.FC = () => {
   }
 
   const renderItems = (item: IWorkExperience) => {
-    const { id, company_name, position, start_date, end_date } = item
+    const { id, company_name, position, description, start_date, end_date } =
+      item
     const startDate = formatDate(start_date, "MMM YYYY")
     const endDate = formatDate(end_date, "MMM YYYY")
 
@@ -134,6 +135,7 @@ const WorkExperience: React.FC = () => {
       title: company_name,
       subtitle: position,
       duriation: `${startDate} - ${endDate}`,
+      extra: description,
     }
 
     return (
