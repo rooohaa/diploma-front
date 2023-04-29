@@ -1,5 +1,6 @@
 import { Box, Button, Modal, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { useEffect } from "react"
 import { requiredRule } from "utils/formRules"
 import { v4 as uuid } from "uuid"
 
@@ -29,6 +30,10 @@ const ProfessionalSkillModal: React.FC<IProfessionalSkillModalProps> = ({
     },
   })
 
+  useEffect(() => {
+    form.reset()
+  }, [opened])
+
   const handleSubmit = (values: IProfessionalSkill) => {
     const payload = {
       ...values,
@@ -38,6 +43,7 @@ const ProfessionalSkillModal: React.FC<IProfessionalSkillModalProps> = ({
     onCreate(payload)
   }
 
+  console.log(form.values)
   return (
     <Modal opened={opened} onClose={onClose} title="Add Skills" centered>
       <form onSubmit={form.onSubmit(handleSubmit)}>
