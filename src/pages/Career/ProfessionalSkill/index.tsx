@@ -128,7 +128,7 @@ const ProfessionalSkill: React.FC = () => {
       ) : (
         <Container size="md">
           <CareerCard
-            title="Professional Skill"
+            title="Professional Skills"
             icon={<Puzzle />}
             onAdd={openModal}
           >

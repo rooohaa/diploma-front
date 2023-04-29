@@ -1,5 +1,6 @@
 import { PrivateRoutes } from "components/system"
 import { Assistant, Main, Profile, SignIn, SignUp, TaskTracker } from "pages"
+import { Activity } from "pages/Activity"
 import {
   Award,
   Education,
@@ -27,6 +28,8 @@ const App: React.FC = () => {
             <Route path="professional-skill" element={<ProfessionalSkill />} />
             <Route path="award" element={<Award />} />
           </Route>
+
+          <Route path="activity" element={<Activity />} />
         </Route>
       </Route>
     </Routes>

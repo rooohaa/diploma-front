@@ -1,4 +1,4 @@
-import { UserCircle, Notes, Robot, Compass } from "tabler-icons-react"
+import { UserCircle, Notes, Robot, Compass, Activity } from "tabler-icons-react"
 
 export type TLink = {
   label: string
@@ -39,5 +39,10 @@ export const links: TLink[] = [
       },
       { label: "Award", path: "/dashboard/career/award" },
     ],
+  },
+  {
+    label: "Activities / Clubs",
+    icon: <Activity />,
+    path: "/dashboard/activity",
   },
 ]
