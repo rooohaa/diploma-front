@@ -43,7 +43,6 @@ const ProfessionalSkillModal: React.FC<IProfessionalSkillModalProps> = ({
     onCreate(payload)
   }
 
-  console.log(form.values)
   return (
     <Modal opened={opened} onClose={onClose} title="Add Skills" centered>
       <form onSubmit={form.onSubmit(handleSubmit)}>
