@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
         fetchEducation(),
         fetchAcademicInformation(),
       ])
-      console.log(education, academicInfo)
+
       setEducation(education)
       setAcademicInfo(academicInfo)
     } catch (err) {
