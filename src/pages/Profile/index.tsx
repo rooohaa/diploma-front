@@ -149,7 +149,12 @@ const Profile: React.FC = () => {
           </Flex>
         </Flex>
 
-        <Button color="red" loading={loading} onClick={handleDownloadResume}>
+        <Button
+          variant="light"
+          color="red"
+          loading={loading}
+          onClick={handleDownloadResume}
+        >
           Download resume
         </Button>
       </Flex>
