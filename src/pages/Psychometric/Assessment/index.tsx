@@ -128,7 +128,7 @@ const Assessment: React.FC = () => {
       setErrors(errors)
       showNotification({
         color: "yellow",
-        message: "Answer to all all question",
+        message: "Answer to the all question",
         icon: <AlertCircle size={20} />,
         autoClose: 2000,
       })

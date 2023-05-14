@@ -94,7 +94,7 @@ const AssessmentSelectComponent: React.FC<IAssessmentSelectProps> = ({
 
       {errors.includes(position) ? (
         <Alert icon={<AlertCircle size={16} />} color="yellow" my="md">
-          Please select one of answer...
+          Please select one of the answer...
         </Alert>
       ) : null}
     </Box>
