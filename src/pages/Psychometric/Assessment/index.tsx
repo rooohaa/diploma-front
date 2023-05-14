@@ -1,6 +1,8 @@
 import { Box, Button, Container, Group, Loader, Progress } from "@mantine/core"
-import { showNotification } from "@mantine/notifications"
+import { cleanNotifications, showNotification } from "@mantine/notifications"
+import { useMe } from "hooks/useMe"
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { supabase } from "supabaseClient"
 import { AlertCircle, X } from "tabler-icons-react"
 import { AssessmentSelect } from "./AssessmentSelect"
@@ -34,13 +36,16 @@ interface ISum {
 }
 
 const Assessment: React.FC = () => {
+  const user = useMe()
+  const navigate = useNavigate()
+  const [params] = useSearchParams()
   const [questions, setQuestions] = useState<IQuestion[]>([])
   const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState<number[]>([])
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(10)
   const [values, setValues] = useState<IValues>({})
-  const [sum, setSum] = useState<ISum>(defaultSum)
+  const [totalSum, setTotalSum] = useState<ISum>(defaultSum)
 
   useEffect(() => {
     fetchTotal()
@@ -101,7 +106,7 @@ const Assessment: React.FC = () => {
         [position]: values.length > 1 ? [values[1]] : values,
       }))
 
-      setSum((prevSum) => {
+      setTotalSum((prevSum) => {
         const [prev, current] = values
 
         return {
@@ -137,9 +142,54 @@ const Assessment: React.FC = () => {
     setPage((prevPage) => prevPage - 1)
   }
 
-  const handleSubmit = () => {
-    // TODO: calculate and navigate to the review page
-    console.log(sum)
+  const handleSubmit = async () => {
+    showNotification({
+      color: "blue",
+      message: "Wait a second calculating your assessment...",
+      loading: true,
+      autoClose: false,
+    })
+
+    const result: string[] = []
+    const pairs = [
+      ["E", "I"],
+      ["N", "S"],
+      ["F", "T"],
+      ["J", "P"],
+    ]
+
+    pairs.forEach((pair) => {
+      const [first, second] = pair
+      const decision = totalSum[first] > totalSum[second] ? first : second
+      result.push(decision)
+    })
+
+    const payload: {
+      id?: string
+      student_id: string
+      type: string
+    } = {
+      student_id: user!.id,
+      type: result.join(""),
+    }
+
+    const id = params.get("lastId")
+
+    if (id) {
+      payload.id = id
+    }
+
+    const { error } = await supabase
+      .from("psychometric_assessment")
+      .upsert(payload)
+
+    if (error) {
+      showError(error.message)
+    } else {
+      navigate("/dashboard/psychometric/review/")
+    }
+
+    cleanNotifications()
   }
 
   const showError = (message: string) => {

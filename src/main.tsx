@@ -11,17 +11,17 @@ import { theme } from "theme"
 import { AuthProvider } from "components/domain"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  // <React.StrictMode>
-  <BrowserRouter>
-    <Provider store={store}>
-      <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-        <NotificationsProvider position="top-right">
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </NotificationsProvider>
-      </MantineProvider>
-    </Provider>
-  </BrowserRouter>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+          <NotificationsProvider position="top-right">
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </NotificationsProvider>
+        </MantineProvider>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 )
