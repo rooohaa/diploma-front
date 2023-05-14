@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
         fetchEducation(),
         fetchAcademicInformation(),
       ])
-      console.log(education, academicInfo)
+
       setEducation(education)
       setAcademicInfo(academicInfo)
     } catch (err) {
@@ -149,7 +149,12 @@ const Profile: React.FC = () => {
           </Flex>
         </Flex>
 
-        <Button color="red" loading={loading} onClick={handleDownloadResume}>
+        <Button
+          variant="light"
+          color="red"
+          loading={loading}
+          onClick={handleDownloadResume}
+        >
           Download resume
         </Button>
       </Flex>

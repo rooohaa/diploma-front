@@ -7,6 +7,7 @@ import {
   ProfessionalSkill,
   WorkExperience,
 } from "pages/Career"
+import { Review, Assessment } from "pages/Psychometric"
 import { Outlet, Route, Routes } from "react-router-dom"
 
 const App: React.FC = () => {
@@ -21,6 +22,11 @@ const App: React.FC = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="task-tracker" element={<TaskTracker />} />
           <Route path="assistant" element={<Assistant />} />
+
+          <Route path="psychometric/*" element={<Outlet />}>
+            <Route path="review" element={<Review />} />
+            <Route path="assessment" element={<Assessment />} />
+          </Route>
 
           <Route path="career/*" element={<Outlet />}>
             <Route path="education" element={<Education />} />
