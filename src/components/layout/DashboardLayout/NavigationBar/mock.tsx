@@ -2,9 +2,9 @@ import {
   UserCircle,
   Notes,
   Robot,
-  Compass,
   Activity,
   ReportAnalytics,
+  Check
 } from "tabler-icons-react"
 
 export type TLink = {
@@ -25,7 +25,7 @@ export const links: TLink[] = [
   },
   {
     label: "Task tracker",
-    icon: <Notes />,
+    icon: <Check />,
     path: "/dashboard/task-tracker",
   },
   {
@@ -35,7 +35,7 @@ export const links: TLink[] = [
   },
   {
     label: "Career",
-    icon: <Compass />,
+    icon: <Notes />,
     path: "/dashboard/career",
     sublinks: [
       { label: "Education", path: "/dashboard/career/education" },

@@ -9,6 +9,10 @@ export const FooterWrapper = styled.footer`
     font-size: 14px;
   }
 
+  nav {
+    display: flex;
+  }
+
   nav > ul {
     list-style: none;
     display: flex;
