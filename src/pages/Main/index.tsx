@@ -25,7 +25,7 @@ const Main: React.FC = () => {
                 for students.
               </Text>
 
-              <Button size="lg" component={Link} to="/dashboard">
+              <Button size="lg" component={Link} to="/dashboard/profile">
                 Explore
               </Button>
             </Flex>
