@@ -25,9 +25,9 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
             <nav className="app-nav">
               <ul>
                 <li>
-                  <Link className="app-nav-link" to="/how-it-works">
+                  <a className="app-nav-link" href="#how-it-works">
                     How it works
-                  </Link>
+                  </a>
                 </li>
 
                 <li>

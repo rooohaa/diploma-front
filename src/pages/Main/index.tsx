@@ -1,8 +1,8 @@
-import { Flex } from "@mantine/core"
-import { Container, Title, Text, Button } from "@mantine/core"
+import { Container, Flex, Title, Text, Button } from "@mantine/core"
 import { Link } from "react-router-dom"
 import { AppLayout } from "components/layout"
-import { MainSection } from "./style"
+import { MainSection, HowItWorksSection, HowItWorksCard } from "./style"
+import { blocks } from "./mock"
 
 const Main: React.FC = () => {
   return (
@@ -21,7 +21,8 @@ const Main: React.FC = () => {
               </Title>
 
               <Text fz="xl" color="#2A3240">
-                The one stop solution for digital ID cards and self-development for students.
+                The one stop solution for digital ID cards and self-development
+                for students.
               </Text>
 
               <Button size="lg" component={Link} to="/dashboard">
@@ -33,6 +34,32 @@ const Main: React.FC = () => {
           </div>
         </Container>
       </MainSection>
+
+      <HowItWorksSection id="how-it-works">
+        <Container size="lg">
+          <Title color="#2a3240" order={2} sx={{ marginBottom: "24px" }}>
+            How It Works
+          </Title>
+
+          <div className="grid">
+            {blocks.map(({ icon, title, descr }) => (
+              <HowItWorksCard key={title}>
+                <Flex align="center" columnGap="16px">
+                  <div className="icon-wrap">{icon}</div>
+
+                  <Text fz="lg" fw={500}>
+                    {title}
+                  </Text>
+                </Flex>
+
+                <Text c="dimmed" sx={{ marginTop: "8px" }}>
+                  {descr}
+                </Text>
+              </HowItWorksCard>
+            ))}
+          </div>
+        </Container>
+      </HowItWorksSection>
     </AppLayout>
   )
 }
