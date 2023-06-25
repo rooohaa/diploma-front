@@ -1,8 +1,9 @@
-import { AppHeader } from '../AppHeader';
+import { AppFooter } from "../AppFooter"
+import { AppHeader } from "../AppHeader"
 
 interface IAppLayoutProps {
-  isAuthHeader?: boolean;
-  children: React.ReactNode;
+  isAuthHeader?: boolean
+  children: React.ReactNode
 }
 
 const AppLayout: React.FC<IAppLayoutProps> = ({
@@ -13,8 +14,9 @@ const AppLayout: React.FC<IAppLayoutProps> = ({
     <>
       <AppHeader isAuth={isAuthHeader} />
       <main>{children}</main>
+      <AppFooter />
     </>
-  );
-};
+  )
+}
 
-export { AppLayout };
+export { AppLayout }

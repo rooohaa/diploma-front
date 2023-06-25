@@ -21,8 +21,7 @@ const Main: React.FC = () => {
               </Title>
 
               <Text fz="xl" color="#2A3240">
-                The one stop solution for digital ID cards and printed ID cards
-                for academic institutions.
+                The one stop solution for digital ID cards and self-development for students.
               </Text>
 
               <Button size="lg" component={Link} to="/dashboard">

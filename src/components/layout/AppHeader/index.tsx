@@ -31,12 +31,6 @@ const AppHeader: React.FC<IAppHeaderProps> = ({ isAuth = false }) => {
                 </li>
 
                 <li>
-                  <Link className="app-nav-link" to="/about">
-                    About us
-                  </Link>
-                </li>
-
-                <li>
                   <Flex columnGap={16}>
                     <Button variant="outline" radius="lg" onClick={open}>
                       Contact us
