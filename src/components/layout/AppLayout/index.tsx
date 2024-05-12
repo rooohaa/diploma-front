@@ -1,3 +1,4 @@
+import { Box, Flex } from "@mantine/core"
 import { AppFooter } from "../AppFooter"
 import { AppHeader } from "../AppHeader"
 
@@ -11,11 +12,13 @@ const AppLayout: React.FC<IAppLayoutProps> = ({
   isAuthHeader = false,
 }) => {
   return (
-    <>
+    <Flex direction="column" mih="100vh">
       <AppHeader isAuth={isAuthHeader} />
-      <main>{children}</main>
+      <Box component="main" sx={{ flex: 1 }}>
+        {children}
+      </Box>
       <AppFooter />
-    </>
+    </Flex>
   )
 }
 
