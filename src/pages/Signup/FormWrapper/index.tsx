@@ -4,9 +4,10 @@ interface IFormWrapperProps {
   children: React.ReactNode
   imagePath: string
 }
+
 const FormWrapper: React.FC<IFormWrapperProps> = ({ imagePath, children }) => {
   return (
-    <Box sx={{ paddingTop: "50px" }}>
+    <Box>
       <Flex gap={50}>
         <Box sx={{ width: "50%" }}>
           <img
