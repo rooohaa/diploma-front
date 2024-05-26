@@ -46,16 +46,14 @@ const Assistant: React.FC = () => {
         `${import.meta.env.VITE_APP_API_URL}/api/prompt`,
         { prompt }
       )
-      if (true) {
-        const { response } = res.data
-        const botMessage: TMessage = {
-          id: uuid(),
-          text: response.trim(),
-          sender: "bot",
-        }
-
-        setMessages((prevMessages) => [...prevMessages, botMessage])
+      const { response } = res.data
+      const botMessage: TMessage = {
+        id: uuid(),
+        text: response.trim(),
+        sender: "bot",
       }
+
+      setMessages((prevMessages) => [...prevMessages, botMessage])
     } catch (error) {
       console.log(error)
     } finally {
@@ -91,8 +89,8 @@ const Assistant: React.FC = () => {
 
         <ActionIcon
           size="xl"
-          variant="light"
-          color="red"
+          variant="filled"
+          color="m-orange"
           loading={loading}
           onClick={handleSendMessage}
         >

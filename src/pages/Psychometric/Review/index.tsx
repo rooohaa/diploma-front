@@ -86,7 +86,7 @@ const Review: React.FC = () => {
 
   const renderReview = () => {
     if (loading) {
-      return <Loader color="red" />
+      return <Loader />
     }
 
     if (review) {
@@ -154,8 +154,6 @@ const Review: React.FC = () => {
         </Box>
 
         <Button
-          variant="light"
-          color="red"
           component={Link}
           to={{
             pathname: `/dashboard/psychometric/assessment`,

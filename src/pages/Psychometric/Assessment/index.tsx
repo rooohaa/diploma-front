@@ -205,7 +205,7 @@ const Assessment: React.FC = () => {
     <Container size="sm">
       {loading ? (
         <Box ta="center">
-          <Loader color="red" />
+          <Loader />
         </Box>
       ) : (
         <Box>
@@ -231,20 +231,14 @@ const Assessment: React.FC = () => {
           ))}
 
           <Group position="center" mt="xl">
-            {page !== 1 ? (
-              <Button color="red" onClick={handlePrev}>
-                Previous
-              </Button>
-            ) : null}
+            {page !== 1 ? <Button onClick={handlePrev}>Previous</Button> : null}
 
             {page === total / PAGE_SIZE ? (
-              <Button color="red" onClick={handleSubmit}>
+              <Button color="green" onClick={handleSubmit}>
                 Submit
               </Button>
             ) : (
-              <Button color="red" onClick={handleNext}>
-                Next
-              </Button>
+              <Button onClick={handleNext}>Next</Button>
             )}
           </Group>
         </Box>

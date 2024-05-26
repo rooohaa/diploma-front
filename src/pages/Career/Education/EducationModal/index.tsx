@@ -133,7 +133,7 @@ const EducationModal: React.FC<IEducationModalProps> = ({
           />
         </Box>
 
-        <Button color="red" type="submit" fullWidth>
+        <Button type="submit" fullWidth>
           Save
         </Button>
 
