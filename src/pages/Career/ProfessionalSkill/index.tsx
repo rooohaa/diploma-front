@@ -98,10 +98,8 @@ const ProfessionalSkill: React.FC = () => {
     return (
       <Badge
         key={id}
-        variant="gradient"
-        size="lg"
+        variant="filled"
         sx={{ paddingRight: 3, textTransform: "none" }}
-        gradient={{ from: "orange", to: "red" }}
         rightSection={
           <ActionIcon
             size="xs"

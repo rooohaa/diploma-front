@@ -20,9 +20,11 @@ const NavBarLink: React.FC<NavBarLinkProps> = ({
 
   return (
     <NavLink
-      color="red"
+      color="m-orange"
+      variant="filled"
       label={label}
       icon={icon}
+      sx={{ borderRadius: 8 }}
       component={Link}
       to={path}
       active={location.pathname === path}

@@ -1,4 +1,4 @@
-import { ActionIcon, Card, Flex, Title } from "@mantine/core"
+import { ActionIcon, Card, Flex, Title, Tooltip } from "@mantine/core"
 import { Plus } from "tabler-icons-react"
 
 interface ICareerCardProps {
@@ -25,11 +25,11 @@ const CareerCard: React.FC<ICareerCardProps> = ({
           </Title>
         </Flex>
 
-        <Flex gap="md">
-          <ActionIcon variant="light" color="red" onClick={onAdd}>
+        <Tooltip label="Add info">
+          <ActionIcon variant="filled" color="m-orange" onClick={onAdd}>
             <Plus />
           </ActionIcon>
-        </Flex>
+        </Tooltip>
       </Flex>
 
       {children}

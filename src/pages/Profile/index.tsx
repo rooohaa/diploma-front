@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   Flex,
+  Loader,
   Text,
   Title,
 } from "@mantine/core"
@@ -17,6 +18,7 @@ import { supabase } from "supabaseClient"
 import {
   BrandFlightradar24,
   BuildingBank,
+  Download,
   Globe,
   MicroscopeOff,
   Scale,
@@ -40,6 +42,7 @@ const Profile: React.FC = () => {
   const user = useMe()
   const personalInfo = useAppSelector(selectPersonalInfo)
   const [loading, setLoading] = useState(false)
+  const [downloading, setDownloading] = useState(false)
   const [education, setEducation] = useState<IEducation[]>([])
   const [academicInfo, setAcademicInfo] = useState<IAcademicInfo[]>([])
 
@@ -58,6 +61,8 @@ const Profile: React.FC = () => {
   }, [user])
 
   const fetchInfo = async () => {
+    setLoading(true)
+
     try {
       const [education, academicInfo] = await Promise.all([
         fetchEducation(),
@@ -68,6 +73,8 @@ const Profile: React.FC = () => {
       setAcademicInfo(academicInfo)
     } catch (err) {
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -98,7 +105,7 @@ const Profile: React.FC = () => {
   }
 
   const handleDownloadResume = async () => {
-    setLoading(true)
+    setDownloading(true)
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_APP_API_URL}/api/resume/pdf/`,
@@ -122,132 +129,149 @@ const Profile: React.FC = () => {
       console.error(error)
       alert("Service error, try later...")
     } finally {
-      setLoading(false)
+      setDownloading(false)
     }
   }
 
   return (
     <Card shadow="md" p="md" radius="md">
-      <Flex py="md" justify="space-between">
-        <Flex gap="md" align="center">
-          <Avatar
-            size={80}
-            src={null}
-            alt="User avatar"
-            color="red"
-            radius="lg"
-          >
-            {initials}
-          </Avatar>
-
-          <Flex direction="column">
-            <Title order={2}>
-              {lastName} {firstName}
-            </Title>
-            <Text>{email}</Text>
-            <Text>{phoneNumber}</Text>
-          </Flex>
-        </Flex>
-
+      <Flex py="xs" justify="space-between">
+        <Avatar
+          size={60}
+          alt="User avatar"
+          variant="filled"
+          color="m-orange"
+          radius="xl"
+        />
         <Button
-          variant="light"
-          color="red"
-          loading={loading}
+          leftIcon={<Download />}
+          loading={downloading}
           onClick={handleDownloadResume}
         >
           Download resume
         </Button>
       </Flex>
 
-      <Box py="md">
-        <Title mb="sm" order={4}>
-          Education:
+      <Flex direction="column">
+        <Title order={2}>
+          {lastName} {firstName}
         </Title>
+        <Text>{email}</Text>
+        <Text>{phoneNumber}</Text>
+      </Flex>
 
-        <Flex direction="column" gap={8}>
-          {education.map(({ university_name, major, degree }, idx) => (
-            <Flex key={idx} gap={8} wrap="wrap">
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<BuildingBank size={24} />}
-              >
-                {university_name}
-              </Badge>
-
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<MicroscopeOff size={24} />}
-              >
-                {major}
-              </Badge>
-
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<Star size={24} />}
-              >
-                {degree}
-              </Badge>
-            </Flex>
-          ))}
+      {loading ? (
+        <Flex justify="center" align="center" w="100%" h="100%">
+          <Loader />
         </Flex>
-      </Box>
+      ) : (
+        <>
+          {education.length ? (
+            <Box py="xs">
+              <Title mb="sm" order={4}>
+                Education:
+              </Title>
 
-      <Box py="md">
-        <Title mb="sm" order={4}>
-          Academic info:
-        </Title>
+              <Flex direction="column" gap={8}>
+                {education.map(({ university_name, major, degree }, idx) => (
+                  <Flex key={idx} gap={8} wrap="wrap">
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<BuildingBank size={18} />}
+                    >
+                      {university_name}
+                    </Badge>
 
-        <Flex direction="column" gap={8}>
-          {academicInfo.map(({ faculty, gpa, advisor }, idx) => (
-            <Flex key={idx} gap={8} wrap="wrap">
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<Globe size={24} />}
-              >
-                {faculty}
-              </Badge>
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<MicroscopeOff size={18} />}
+                    >
+                      {major}
+                    </Badge>
 
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<Scale size={24} />}
-              >
-                {gpa}
-              </Badge>
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<Star size={18} />}
+                    >
+                      {degree}
+                    </Badge>
+                  </Flex>
+                ))}
+              </Flex>
+            </Box>
+          ) : null}
+          {academicInfo.length ? (
+            <Box py="xs">
+              <Title mb="sm" order={4}>
+                Academic info:
+              </Title>
 
-              <Badge
-                variant="gradient"
-                size="lg"
-                h="auto"
-                sx={{ padding: "5px 10px", textTransform: "none" }}
-                gradient={{ from: "orange", to: "red" }}
-                leftSection={<BrandFlightradar24 size={24} />}
-              >
-                {advisor}
-              </Badge>
-            </Flex>
-          ))}
-        </Flex>
-      </Box>
+              <Flex direction="column" gap={8}>
+                {academicInfo.map(({ faculty, gpa, advisor }, idx) => (
+                  <Flex key={idx} gap={8} wrap="wrap">
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<Globe size={18} />}
+                    >
+                      {faculty}
+                    </Badge>
+
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<Scale size={18} />}
+                    >
+                      {gpa}
+                    </Badge>
+
+                    <Badge
+                      variant="filled"
+                      sx={{
+                        textTransform: "none",
+                        span: {
+                          maxHeight: "100%",
+                        },
+                      }}
+                      leftSection={<BrandFlightradar24 size={18} />}
+                    >
+                      {advisor}
+                    </Badge>
+                  </Flex>
+                ))}
+              </Flex>
+            </Box>
+          ) : null}
+        </>
+      )}
     </Card>
   )
 }

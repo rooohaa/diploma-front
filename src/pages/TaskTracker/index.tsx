@@ -232,12 +232,7 @@ const TaskTracker: React.FC = () => {
               <Title order={2}>Task Tracker</Title>
             </Indicator>
 
-            <Button
-              color="red"
-              variant="light"
-              leftIcon={<Plus />}
-              onClick={openCreate}
-            >
+            <Button leftIcon={<Plus />} onClick={openCreate}>
               Create
             </Button>
           </Flex>

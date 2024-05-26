@@ -29,6 +29,23 @@ interface IActivityCardProps {
   onClubJoin: () => void
 }
 
+const getRandomColor = () => {
+  const selectedColors = [
+    "m-orange",
+    "yellow",
+    "green",
+    "violet",
+    "pink",
+    "red",
+    "indigo",
+  ]
+
+  const min = Math.ceil(1)
+  const max = Math.floor(selectedColors.length)
+  const random = Math.floor(Math.random() * (max - min + 1)) + min
+  return selectedColors[random]
+}
+
 const ActivityCard: React.FC<IActivityCardProps> = ({
   activity,
   onClubJoin,
@@ -85,8 +102,8 @@ const ActivityCard: React.FC<IActivityCardProps> = ({
         ) : (
           <Tooltip label="Join the club">
             <ActionIcon
-              variant="light"
-              color="blue"
+              variant="filled"
+              color="m-orange"
               loading={loading}
               onClick={handleJoinClub}
             >
@@ -100,7 +117,7 @@ const ActivityCard: React.FC<IActivityCardProps> = ({
 
       <Flex direction="row" align="center" columnGap={8}>
         {tags.map((tag) => (
-          <Badge key={tag} color="blue">
+          <Badge key={tag} variant="filled">
             {tag}
           </Badge>
         ))}
@@ -122,7 +139,11 @@ const ActivityCard: React.FC<IActivityCardProps> = ({
               {member.map(
                 ({ personal_information: { first_name, last_name } }) => (
                   <Tooltip label={`${first_name} ${last_name}`}>
-                    <Avatar src={null} radius="xl" color="indigo">
+                    <Avatar
+                      radius="xl"
+                      color={getRandomColor()}
+                      variant="filled"
+                    >
                       {getUserInitials(first_name, last_name)}
                     </Avatar>
                   </Tooltip>

@@ -133,7 +133,7 @@ const WorkExperienceModal: React.FC<IWorkExperienceModalProps> = ({
           />
         </Box>
 
-        <Button color="red" type="submit" fullWidth>
+        <Button type="submit" fullWidth>
           Save
         </Button>
 

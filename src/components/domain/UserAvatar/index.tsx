@@ -44,7 +44,8 @@ const UserAvatar: React.FC = () => {
         <Avatar
           src={null}
           alt="User avatar"
-          color="red"
+          variant="filled"
+          color="m-orange"
           radius="xl"
           sx={{ cursor: "pointer" }}
         >
