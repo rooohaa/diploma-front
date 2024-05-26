@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextInput } from "@mantine/core"
+import { Box, Button, Drawer, Modal, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { useEffect } from "react"
 import { requiredRule } from "utils/formRules"
@@ -44,7 +44,14 @@ const ProfessionalSkillModal: React.FC<IProfessionalSkillModalProps> = ({
   }
 
   return (
-    <Modal opened={opened} onClose={onClose} title="Add Skills" centered>
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      title="Add Skills"
+      position="right"
+      padding="md"
+      size="lg"
+    >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Box sx={{ marginBottom: "16px" }}>
           <TextInput
@@ -59,7 +66,7 @@ const ProfessionalSkillModal: React.FC<IProfessionalSkillModalProps> = ({
           Save
         </Button>
       </form>
-    </Modal>
+    </Drawer>
   )
 }
 

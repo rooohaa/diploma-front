@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Textarea, TextInput } from "@mantine/core"
+import { Box, Button, Drawer, Textarea, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { requiredRule } from "utils/formRules"
 import { showNotification } from "@mantine/notifications"
@@ -72,7 +72,14 @@ const ContactUsModal: React.FC<IContactUsModalProps> = ({ opened, close }) => {
   }
 
   return (
-    <Modal opened={opened} onClose={close} title="Contact us" centered>
+    <Drawer
+      opened={opened}
+      onClose={close}
+      title="Contact us"
+      position="right"
+      padding="md"
+      size="lg"
+    >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Box sx={{ marginBottom: "16px" }}>
           <TextInput
@@ -111,7 +118,7 @@ const ContactUsModal: React.FC<IContactUsModalProps> = ({ opened, close }) => {
           </Button>
         </Box>
       </form>
-    </Modal>
+    </Drawer>
   )
 }
 

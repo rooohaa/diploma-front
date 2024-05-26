@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Modal,
+  Drawer,
   SegmentedControl,
   Textarea,
   TextInput,
@@ -84,11 +84,13 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
   }
 
   return (
-    <Modal
+    <Drawer
       opened={opened}
       onClose={onClose}
       title={isEdit ? "Update task" : "Create task"}
-      centered
+      position="right"
+      padding="md"
+      size="lg"
     >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Box sx={{ marginBottom: "16px" }}>
@@ -151,7 +153,7 @@ const TaskTrackerModal: React.FC<ITaskTrackerModalProps> = ({
           </Button>
         ) : null}
       </form>
-    </Modal>
+    </Drawer>
   )
 }
 

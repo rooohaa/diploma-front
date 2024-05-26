@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextInput } from "@mantine/core"
+import { Box, Button, Drawer, TextInput } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
 import { useForm } from "@mantine/form"
 import dayjs from "dayjs"
@@ -84,7 +84,14 @@ const EducationModal: React.FC<IEducationModalProps> = ({
   }
 
   return (
-    <Modal opened={opened} onClose={onClose} title={title} centered>
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      title={title}
+      position="right"
+      padding="md"
+      size="lg"
+    >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Box sx={{ marginBottom: "16px" }}>
           <TextInput
@@ -149,7 +156,7 @@ const EducationModal: React.FC<IEducationModalProps> = ({
           </Button>
         ) : null}
       </form>
-    </Modal>
+    </Drawer>
   )
 }
 

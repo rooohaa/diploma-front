@@ -42,7 +42,11 @@ const CareerCardItem: React.FC<ICareerCardItemProps> = ({
           ) : null}
         </Box>
 
-        <ActionIcon variant="light" color="red" onClick={() => onEdit(id)}>
+        <ActionIcon
+          variant="transparent"
+          color="m-orange"
+          onClick={() => onEdit(id)}
+        >
           <Pencil />
         </ActionIcon>
       </Flex>
