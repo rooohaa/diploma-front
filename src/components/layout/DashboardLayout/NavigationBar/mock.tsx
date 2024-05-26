@@ -4,7 +4,8 @@ import {
   Robot,
   Activity,
   ReportAnalytics,
-  Check
+  Check,
+  Album,
 } from "tabler-icons-react"
 
 export type TLink = {
@@ -56,5 +57,10 @@ export const links: TLink[] = [
     label: "Psychometric review",
     icon: <ReportAnalytics />,
     path: "/dashboard/psychometric/review",
+  },
+  {
+    label: "Grade",
+    icon: <Album />,
+    path: "/dashboard/grade",
   },
 ]

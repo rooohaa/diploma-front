@@ -24,10 +24,11 @@ const NavBarLink: React.FC<NavBarLinkProps> = ({
       variant="filled"
       label={label}
       icon={icon}
+      my={5}
       sx={{ borderRadius: 8 }}
       component={Link}
       to={path}
-      active={location.pathname === path}
+      active={location.pathname === path || location.pathname.includes(path)}
     >
       {children}
     </NavLink>

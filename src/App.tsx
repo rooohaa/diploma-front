@@ -1,12 +1,21 @@
 import { PrivateRoutes } from "components/system"
-import { Assistant, Main, Profile, SignIn, SignUp, TaskTracker } from "pages"
-import { Activity } from "pages/Activity"
+import {
+  Assistant,
+  Grade,
+  Main,
+  Profile,
+  SignIn,
+  SignUp,
+  TaskTracker,
+  Activity,
+} from "pages"
 import {
   Award,
   Education,
   ProfessionalSkill,
   WorkExperience,
 } from "pages/Career"
+import { GradeDetails } from "pages/Grade/GradeDetails"
 import { Review, Assessment } from "pages/Psychometric"
 import { Outlet, Route, Routes } from "react-router-dom"
 
@@ -35,6 +44,8 @@ const App: React.FC = () => {
             <Route path="award" element={<Award />} />
           </Route>
 
+          <Route path="grade" element={<Grade />} />
+          <Route path="grade/:id" element={<GradeDetails />} />
           <Route path="activity" element={<Activity />} />
         </Route>
       </Route>
