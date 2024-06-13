@@ -9,6 +9,7 @@ import {
   TaskTracker,
   Activity,
 } from "pages"
+import { Analysis } from "pages/Analysis"
 import {
   Award,
   Education,
@@ -30,7 +31,8 @@ const App: React.FC = () => {
         <Route path="dashboard/*" element={<Outlet />}>
           <Route path="profile" element={<Profile />} />
           <Route path="task-tracker" element={<TaskTracker />} />
-          <Route path="assistant" element={<Assistant />} />
+          {/* <Route path="assistant" element={<Assistant />} /> */}
+          <Route path="analysis" element={<Analysis />} />
 
           <Route path="psychometric/*" element={<Outlet />}>
             <Route path="review" element={<Review />} />
