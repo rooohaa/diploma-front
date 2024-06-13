@@ -29,11 +29,16 @@ export const links: TLink[] = [
     icon: <Check />,
     path: "/dashboard/task-tracker",
   },
-  // {
-  //   label: "AI Assistant",
-  //   icon: <Robot />,
-  //   path: "/dashboard/assistant",
-  // },
+  {
+    label: "Grade",
+    icon: <Album />,
+    path: "/dashboard/grade",
+  },
+  {
+    label: "Activities / Clubs",
+    icon: <Activity />,
+    path: "/dashboard/activity",
+  },
   {
     label: "Career",
     icon: <Notes />,
@@ -49,19 +54,9 @@ export const links: TLink[] = [
     ],
   },
   {
-    label: "Activities / Clubs",
-    icon: <Activity />,
-    path: "/dashboard/activity",
-  },
-  {
     label: "Psychometric review",
     icon: <ReportAnalytics />,
     path: "/dashboard/psychometric/review",
-  },
-  {
-    label: "Grade",
-    icon: <Album />,
-    path: "/dashboard/grade",
   },
   {
     label: "Analysis",
